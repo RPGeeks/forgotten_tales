@@ -1,3 +1,6 @@
 [submodule "Assets/Mirror"]
 	path = Assets/Mirror
 	url = https://github.com/vis2k/Mirror/
+[submodule "Assets/ParrelSync"]
+	path = Assets/ParrelSync
+	url = https://github.com/VeriorPies/ParrelSync
