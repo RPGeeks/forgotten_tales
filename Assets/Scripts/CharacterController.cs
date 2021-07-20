@@ -1,8 +1,9 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterController : MonoBehaviour
+public class CharacterController : NetworkBehaviour
 {
     Rigidbody rb;
     Vector3 m_EulerAngleVelocity;
@@ -69,39 +70,43 @@ public class CharacterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        t += Time.fixedDeltaTime;
-
-        bool swaying = false;
-
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))
+        if (isLocalPlayer)
         {
-            t = 0;
-        }
+            t += Time.fixedDeltaTime;
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            swaying = true;
-            rb.MovePosition(rb.position + rb.rotation * Vector3.forward * Time.fixedDeltaTime * forwardSpeed);
-        }
+            bool swaying = false;
 
-        if (Input.GetKey(KeyCode.S))
-        {
-            swaying = true;
-            rb.MovePosition(rb.position - rb.rotation * Vector3.forward * Time.fixedDeltaTime * forwardSpeed);
-        }
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))
+            {
+                t = 0;
+            }
 
-        if (Input.GetKey(KeyCode.D))
-        {
-            Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * Time.fixedDeltaTime);
-            rb.MoveRotation(rb.rotation * deltaRotation);
-        }
+            if (Input.GetKey(KeyCode.W))
+            {
+                swaying = true;
+                rb.MovePosition(rb.position + rb.rotation * Vector3.forward * Time.fixedDeltaTime * forwardSpeed);
+            }
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            Quaternion deltaRotation = Quaternion.Euler(-m_EulerAngleVelocity * Time.fixedDeltaTime);
-            rb.MoveRotation(rb.rotation * deltaRotation);
-        }
+            if (Input.GetKey(KeyCode.S))
+            {
+                swaying = true;
+                rb.MovePosition(rb.position - rb.rotation * Vector3.forward * Time.fixedDeltaTime * forwardSpeed);
+            }
 
-        setFeetHandsAngles(!swaying);
+            if (Input.GetKey(KeyCode.D))
+            {
+                Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * Time.fixedDeltaTime);
+                rb.MoveRotation(rb.rotation * deltaRotation);
+            }
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                Quaternion deltaRotation = Quaternion.Euler(-m_EulerAngleVelocity * Time.fixedDeltaTime);
+                rb.MoveRotation(rb.rotation * deltaRotation);
+            }
+
+            setFeetHandsAngles(!swaying);
+        }
+        
     }
 }
