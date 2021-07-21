@@ -7,7 +7,11 @@ public class CharacterController : NetworkBehaviour
 {
     Rigidbody rb;
     Vector3 m_EulerAngleVelocity;
-    [SerializeField] float forwardSpeed = 0.8f;
+
+    // SerializeField later
+    float forwardSpeed = 3f;
+
+    float shiftMultiplier = 1f;
 
     [SerializeField] GameObject leftFoot;
     [SerializeField] GameObject rightFoot;
@@ -22,14 +26,14 @@ public class CharacterController : NetworkBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        m_EulerAngleVelocity = new Vector3(0, 10, 0);
+        m_EulerAngleVelocity = new Vector3(0, 40, 0);
     }
 
     float lastSwayAngle = 0f;
 
     void setFeetHandsAngles(bool stop)
     {
-        float angle = Mathf.Sin(t / 1.2f);
+        float angle = Mathf.Sin(t * 4f);
         float Xrot = 25f * angle;
 
         if (stop)
@@ -72,7 +76,16 @@ public class CharacterController : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            t += Time.fixedDeltaTime;
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                shiftMultiplier = 2f;
+            }
+            else
+            {
+                shiftMultiplier = 1f;
+            }
+
+            t += Time.fixedDeltaTime * shiftMultiplier;
 
             bool swaying = false;
 
@@ -84,24 +97,24 @@ public class CharacterController : NetworkBehaviour
             if (Input.GetKey(KeyCode.W))
             {
                 swaying = true;
-                rb.MovePosition(rb.position + rb.rotation * Vector3.forward * Time.fixedDeltaTime * forwardSpeed);
+                rb.MovePosition(rb.position + rb.rotation * Vector3.forward * shiftMultiplier * Time.fixedDeltaTime * forwardSpeed);
             }
 
             if (Input.GetKey(KeyCode.S))
             {
                 swaying = true;
-                rb.MovePosition(rb.position - rb.rotation * Vector3.forward * Time.fixedDeltaTime * forwardSpeed);
+                rb.MovePosition(rb.position - rb.rotation * Vector3.forward * shiftMultiplier * Time.fixedDeltaTime * forwardSpeed);
             }
 
             if (Input.GetKey(KeyCode.D))
             {
-                Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * Time.fixedDeltaTime);
+                Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * shiftMultiplier * Time.fixedDeltaTime);
                 rb.MoveRotation(rb.rotation * deltaRotation);
             }
 
             if (Input.GetKey(KeyCode.A))
             {
-                Quaternion deltaRotation = Quaternion.Euler(-m_EulerAngleVelocity * Time.fixedDeltaTime);
+                Quaternion deltaRotation = Quaternion.Euler(-m_EulerAngleVelocity * shiftMultiplier * Time.fixedDeltaTime);
                 rb.MoveRotation(rb.rotation * deltaRotation);
             }
 
