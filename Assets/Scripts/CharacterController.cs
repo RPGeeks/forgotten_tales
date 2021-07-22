@@ -71,6 +71,17 @@ public class CharacterController : NetworkBehaviour
         lastSwayAngle = angle;
     }
 
+    private void Update()
+    {
+        if (isLocalPlayer)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                rb.AddForce(Vector3.up * 5f, ForceMode.Impulse);
+            }
+        }
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
