@@ -16,7 +16,6 @@ public class CharacterController : NetworkBehaviour
 
     private ProceduralAnimation<HumanoidRigidRig> walkAnim;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -44,10 +43,5 @@ public class CharacterController : NetworkBehaviour
     {
         animationController.Step(Time.deltaTime);
         movementController.Step(Time.fixedDeltaTime);
-    }
-
-    void FixedUpdate()
-    {
-        
     }
 }

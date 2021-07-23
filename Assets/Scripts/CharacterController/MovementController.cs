@@ -39,13 +39,11 @@ public class MovementController
 
         if (cif.IsWalking())
         {
-            //swaying = true;
             rb.MovePosition(rb.position + rb.rotation * Vector3.forward * shiftMultiplier * delta * forwardSpeed);
         }
 
         if (cif.IsWalkingBackwards())
         {
-            //swaying = true;
             rb.MovePosition(rb.position - rb.rotation * Vector3.forward * shiftMultiplier * delta * forwardSpeed);
         }
 
