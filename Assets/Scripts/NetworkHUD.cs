@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class NetworkHUD : MonoBehaviour
 {
-    public InputField field;
+    [SerializeField]
+    private InputField field;
 
     public void Host()
     {
