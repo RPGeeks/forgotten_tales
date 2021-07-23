@@ -48,7 +48,7 @@ public abstract class ProceduralAnimation<RigType>
     }
 }
 
-// Animation that does nothing
+// Animation that does nothing ( null pattern )
 public class EmptyAnimation<RigType> : ProceduralAnimation<RigType>
 {
     public override void OnAnimationEnd() { }

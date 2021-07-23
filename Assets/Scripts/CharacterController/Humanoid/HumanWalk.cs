@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class HumanWalk : ProceduralAnimation<HumanoidRigidRig>
 {
-    HumanoidRigidRig rig;
-    CharacterInputFeed cif;
+    private HumanoidRigidRig rig;
+    private CharacterInputFeed cif;
 
-    float lastSwayAngle = 0f;
-    float t = 0;
-    float shiftMultiplier = 1f;
+    private float lastSwayAngle = 0f;
+    private float t = 0;
+    private float shiftMultiplier = 1f;
 
     public HumanWalk(HumanoidRigidRig rig, CharacterInputFeed cif)
     {
@@ -21,7 +21,7 @@ public class HumanWalk : ProceduralAnimation<HumanoidRigidRig>
 
     public override void OnAnimationStart() { t = 0; }
 
-    void setFeetHandsAngles(bool stop)
+    private void setFeetHandsAngles(bool stop)
     {
         float angle = Mathf.Sin(t * 4f);
         float Xrot = 25f * angle;

@@ -7,9 +7,9 @@ public class CharacterController : NetworkBehaviour
 {
     [SerializeField] private HumanoidRigidRig rigParts;
 
-    Rigidbody rb;
+    private Rigidbody rb;
 
-    public CharacterInputFeed cif;
+    private CharacterInputFeed cif;
 
     private ProceduralAnimationController<HumanoidRigidRig> animationController;
     private MovementController movementController;
@@ -36,8 +36,6 @@ public class CharacterController : NetworkBehaviour
 
         movementController = new MovementController(rb, cif);
     }
-
-    float shiftMultiplier = 1f;
 
     private void Update()
     {

@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class MovementController
 {
-    float forwardSpeed = 1.2f;
+    private float forwardSpeed = 1.2f;
 
-    Rigidbody rb;
-    CharacterInputFeed cif;
+    private Rigidbody rb;
+    private CharacterInputFeed cif;
 
-    Vector3 m_EulerAngleVelocity;
+    private static Vector3 m_EulerAngleVelocity = new Vector3(0, 15, 0);
 
     public MovementController(Rigidbody rb, CharacterInputFeed cif)
     {
         this.rb = rb;
         this.cif = cif;
-
-        m_EulerAngleVelocity = new Vector3(0, 15, 0);
     }
 
     public void Step(float delta)
@@ -24,7 +22,7 @@ public class MovementController
         float shiftMultiplier;
         if (cif.IsSprinting())
         {
-            shiftMultiplier = 2f;
+            shiftMultiplier = 1.5f;
         }
         else
         {
