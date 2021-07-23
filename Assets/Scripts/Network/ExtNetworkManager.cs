@@ -14,4 +14,6 @@ public class ExtNetworkManager : NetworkManager
         Debug.Log(conn.clientOwnedObjects.Count);
     }
     */
+
+    // Use this file later to add code in the network manager callbacks
 }

@@ -13,6 +13,11 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float maxZoomIn = 4f;
     [SerializeField] private Transform player;
 
+    public void SetCameraTarget( Transform t )
+    {
+        this.player = t;
+    }
+
     void Start()
     {
 
@@ -20,7 +25,10 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        MovementCamera();
+        if ( player != null )
+        {
+            MovementCamera();
+        }
     }
 
     void MovementCamera()
