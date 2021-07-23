@@ -5,7 +5,8 @@ using UnityEngine;
 public class SkyboxController : MonoBehaviour
 {
     [SerializeField] private float skyboxRotationSpeed = 1f;
-      void Update()
+
+    void Update()
     {
         RenderSettings.skybox.SetFloat("_Rotation", Time.time * skyboxRotationSpeed);
     }
