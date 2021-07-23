@@ -1,5 +1,6 @@
 ## Development branch ##
-This is the home of our programming team where every change made will be tested due to integration conflicts before further merging into main.
+This is the home of our programming team.
+Here every change made will be tested for integration conflicts before further merging into main.
 
 ## Development setup ##
 
