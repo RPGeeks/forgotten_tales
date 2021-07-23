@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class HorseRidigRig : EntityRig
+public class HorseRidigRig : IEntityRig
 {
     public HorseRidigRig() { }
 

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface EntityRig { }
+public interface IEntityRig { }
 
-public class ProceduralAnimationController<RigType> where RigType : EntityRig
+public class ProceduralAnimationController<RigType> where RigType : IEntityRig
 {
     public static EmptyAnimation<RigType> emptyAnim = new EmptyAnimation<RigType>();
 
