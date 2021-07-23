@@ -35,6 +35,8 @@ public class CharacterController : NetworkBehaviour
         animationController.SwitchTo(walkAnim);
 
         movementController = new MovementController(rb, cif);
+
+        Camera.main.GetComponent<CameraController>().SetCameraTarget(transform);
     }
 
     private void Update()
