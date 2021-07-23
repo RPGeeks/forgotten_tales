@@ -1,5 +1,5 @@
-# curly-burly
-A co-op RPG game started during a workshop
+## Development branch ##
+This is the home of our programming team where every change made will be tested due to integration conflicts before further merging into main.
 
 ## Development setup ##
 
