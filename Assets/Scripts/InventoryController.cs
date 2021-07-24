@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Mirror;
 
-public class InventoryController : MonoBehaviour
+public class InventoryController :  NetworkBehaviour
 {
     //private bool inventoryEnabled;
 
@@ -15,12 +16,12 @@ public class InventoryController : MonoBehaviour
 
     [Header("Inventory parameters")]
     [SerializeField] private int inventorySize;
-
-    private GameObject[] slots;
-
+    private SyncList<GameObject> slots = new SyncList<GameObject>();
+   
+    
     private void Awake()
     {
-        slots = new GameObject[inventorySize];
+      //  slots = new SyncList<GameObject>();
     }
 
     void Start()
@@ -31,7 +32,7 @@ public class InventoryController : MonoBehaviour
 
         for (int i = 0; i < inventorySize; i++)
         {
-            slots[i] = Instantiate(slotPrefab, inventory.transform);
+            slots.Add(Instantiate(slotPrefab, inventory.transform));
         }
 
         exitButton.onClick.AddListener(QuitInventory);
@@ -39,9 +40,9 @@ public class InventoryController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
+        if (isLocalPlayer && Input.GetKeyDown(KeyCode.I))
         {
-            gameObject.SetActive(!inventory.activeSelf);
+            gameObject.SetActive(!gameObject.activeSelf);
         }
     }
 
