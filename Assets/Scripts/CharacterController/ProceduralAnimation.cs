@@ -11,7 +11,19 @@ public class ProceduralAnimationController<RigType> where RigType : IEntityRig
     CharacterInputFeed cif;
     RigType targetRig;
 
-    ProceduralAnimation<RigType> currentAnimation;
+    private ProceduralAnimation<RigType> currentAnimation = emptyAnim;
+
+    public void SwitchTo(ProceduralAnimation<RigType> newAnim)
+    {
+        currentAnimation.OnAnimationEnd();
+        currentAnimation = newAnim;
+        currentAnimation.OnAnimationStart();
+    }
+
+    public ProceduralAnimation<RigType> GetCurrentAnim()
+    {
+        return currentAnimation;
+    }
 
     public ProceduralAnimationController( CharacterInputFeed cif, RigType targetRig )
     {
@@ -25,11 +37,9 @@ public class ProceduralAnimationController<RigType> where RigType : IEntityRig
         currentAnimation.OnAnimationStep(delta);
     }
 
-    public void SwitchTo(ProceduralAnimation<RigType> newState)
+    public bool Finished()
     {
-        currentAnimation.OnAnimationEnd();
-        currentAnimation = newState;
-        currentAnimation.OnAnimationStart();
+        return currentAnimation.Finished();
     }
 }
 
@@ -40,6 +50,8 @@ public abstract class ProceduralAnimation<RigType>
     public abstract void OnAnimationStep(float delta);
 
     public abstract void OnAnimationEnd();
+
+    public abstract bool Finished();
 
     public static void InterpolateTransforms( Transform t1, Transform t2, float t )
     {
@@ -54,4 +66,6 @@ public class EmptyAnimation<RigType> : ProceduralAnimation<RigType>
     public override void OnAnimationEnd() { }
     public override void OnAnimationStart() { }
     public override void OnAnimationStep(float delta) { }
+
+    public override bool Finished() { return false; }
 }

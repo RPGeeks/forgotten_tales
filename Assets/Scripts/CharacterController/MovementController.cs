@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MovementController
 {
-    private float forwardSpeed = 1.2f;
+    private float forwardSpeed = 4f;
 
     private Rigidbody rb;
     private CharacterInputFeed cif;
@@ -20,6 +20,7 @@ public class MovementController
     public void Step(float delta)
     {
         float shiftMultiplier;
+
         if (cif.IsSprinting())
         {
             shiftMultiplier = 1.5f;
@@ -42,19 +43,23 @@ public class MovementController
 
         if (cif.IsWalkingBackwards())
         {
-            rb.MovePosition(rb.position - rb.rotation * Vector3.forward * shiftMultiplier * delta * forwardSpeed);
+            rb.MovePosition(rb.position - rb.rotation * Vector3.forward * delta * forwardSpeed);
         }
 
         if (cif.IsTurningRight())
         {
-            Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * shiftMultiplier * delta);
-            rb.MoveRotation(rb.rotation * deltaRotation);
+            /*Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * delta);
+            rb.MoveRotation(rb.rotation * deltaRotation);*/
+
+            rb.MovePosition(rb.position + rb.rotation * Vector3.right * delta * forwardSpeed/2);
         }
 
         if (cif.IsTurningLeft())
         {
-            Quaternion deltaRotation = Quaternion.Euler(-m_EulerAngleVelocity * shiftMultiplier * delta);
-            rb.MoveRotation(rb.rotation * deltaRotation);
+            /*Quaternion deltaRotation = Quaternion.Euler(-m_EulerAngleVelocity * delta);
+            rb.MoveRotation(rb.rotation * deltaRotation);*/
+
+            rb.MovePosition(rb.position - rb.rotation * Vector3.right * delta * forwardSpeed/2);
         }
     }
 }

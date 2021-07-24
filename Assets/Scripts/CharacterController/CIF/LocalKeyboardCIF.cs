@@ -84,4 +84,13 @@ public class LocalKeyboardCIF : CharacterInputFeed
         }
         return false;
     }
+
+    public override bool AttemptsAttack()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            return true;
+        }
+        return false;
+    }
 }
