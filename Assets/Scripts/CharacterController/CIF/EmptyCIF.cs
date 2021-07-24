@@ -49,4 +49,9 @@ public class EmptyCIF : CharacterInputFeed
     {
         return false;
     }
+
+    public override bool AttemptsAttack()
+    {
+        return false;
+    }
 }

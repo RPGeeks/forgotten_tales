@@ -21,4 +21,6 @@ public abstract class CharacterInputFeed
     public abstract bool IsSprinting();
 
     public abstract bool IsCrouching();
+
+    public abstract bool AttemptsAttack();
 }

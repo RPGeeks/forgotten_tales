@@ -15,6 +15,8 @@ public class CharacterController : NetworkBehaviour
     private MovementController movementController;
 
     private ProceduralAnimation<HumanoidRigidRig> walkAnim;
+    private ProceduralAnimation<HumanoidRigidRig> idleAnim;
+    private ProceduralAnimation<HumanoidRigidRig> attackAnim;
 
     void Start()
     {
@@ -31,8 +33,11 @@ public class CharacterController : NetworkBehaviour
         animationController = new ProceduralAnimationController<HumanoidRigidRig>(cif, rigParts);
 
         walkAnim = new HumanWalk(rigParts, cif);
+        attackAnim = new HumanAttack(rigParts, cif);
+        idleAnim = new HumanIdle(rigParts, cif);
 
         animationController.SwitchTo(walkAnim);
+        //animationController.SwitchTo(attackAnim);
 
         movementController = new MovementController(rb, cif);
 
@@ -41,7 +46,38 @@ public class CharacterController : NetworkBehaviour
 
     private void Update()
     {
+        if (cif.AttemptsAttack())
+        {
+            animationController.SwitchTo(attackAnim);
+        }
+
+        if (animationController.GetCurrentAnim() == attackAnim)
+        {
+            if (animationController.Finished())
+            {
+                animationController.SwitchTo(walkAnim);
+            }
+        }
+
+        if (animationController.GetCurrentAnim() == walkAnim)
+        {
+            if (!cif.IsWalking() && !cif.IsWalkingBackwards())
+            {
+                if ( animationController.Finished())
+                    animationController.SwitchTo(idleAnim);
+            }
+        }
+
+        if (animationController.GetCurrentAnim() == idleAnim)
+        {
+            if (cif.JustStartedWalking())
+            {
+                animationController.SwitchTo(walkAnim);
+            }
+        }
+        
+
         animationController.Step(Time.deltaTime);
-        movementController.Step(Time.fixedDeltaTime);
+        movementController.Step(Time.deltaTime);
     }
 }

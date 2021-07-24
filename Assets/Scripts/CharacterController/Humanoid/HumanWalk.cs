@@ -17,45 +17,63 @@ public class HumanWalk : ProceduralAnimation<HumanoidRigidRig>
         this.cif = cif;
     }
 
+    bool finished;
+
+    private static readonly float epsilon = 0.01f;
+
     public override void OnAnimationEnd() { }
 
-    public override void OnAnimationStart() { t = 0; }
+    public override void OnAnimationStart() { t = 0; finished = false; }
 
     private void setFeetHandsAngles(bool stop)
     {
-        float angle = Mathf.Sin(t * 4f);
+        float angle = Mathf.Sin(t * 8f);
         float Xrot = 25f * angle;
 
         if (stop)
         {
+            if ( Mathf.Abs(angle) <= epsilon)
+            {
+                finished = true;
+            }
+
             if (Mathf.Abs(lastSwayAngle) < Mathf.Abs(angle))
             {
                 return;
             }
+        } else
+        {
+            finished = false;
         }
 
-        rig.leftFoot.transform.eulerAngles = new Vector3(
-        Xrot,
-        rig.leftFoot.transform.eulerAngles.y,
-        rig.leftFoot.transform.eulerAngles.z
+        rig.chest.localPosition = new Vector3(
+        rig.chest.localPosition.x,
+        rig.chest.localPosition.y,
+        rig.chest.localPosition.z 
         );
 
-        rig.rightFoot.transform.eulerAngles = new Vector3(
+        rig.leftFoot.eulerAngles = new Vector3(
+        Xrot,
+        rig.leftFoot.eulerAngles.y,
+        rig.leftFoot.eulerAngles.z 
+        );
+
+        rig.rightFoot.eulerAngles = new Vector3(
         -Xrot,
-        rig.rightFoot.transform.eulerAngles.y,
-        rig.rightFoot.transform.eulerAngles.z
+        rig.rightFoot.eulerAngles.y,
+        rig.rightFoot.eulerAngles.z
         );
 
-        rig.leftHand.transform.eulerAngles = new Vector3(
+        rig.leftHand.eulerAngles = new Vector3(
         Xrot,
-        rig.leftHand.transform.eulerAngles.y,
-        rig.leftHand.transform.eulerAngles.z
+        rig.leftHand.eulerAngles.y,
+        rig.leftHand.eulerAngles.z
         );
 
-        rig.rightHand.transform.eulerAngles = new Vector3(
+        rig.rightHand.eulerAngles = new Vector3(
         Xrot,
-        rig.rightHand.transform.eulerAngles.y,
-        rig.rightHand.transform.eulerAngles.z
+        rig.rightHand.eulerAngles.y,
+        rig.rightHand.eulerAngles.z
         );
 
         lastSwayAngle = angle;
@@ -65,7 +83,7 @@ public class HumanWalk : ProceduralAnimation<HumanoidRigidRig>
     {
         if (cif.IsSprinting())
         {
-            shiftMultiplier = 2f;
+            shiftMultiplier = 1.5f;
         }
         else
         {
@@ -87,6 +105,11 @@ public class HumanWalk : ProceduralAnimation<HumanoidRigidRig>
         }
 
         setFeetHandsAngles(!swaying);
+    }
+
+    public override bool Finished()
+    {
+        return finished;
     }
 }
 
