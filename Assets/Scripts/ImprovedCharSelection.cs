@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 public class ImprovedCharSelection : MonoBehaviour
 {
     private GameObject[,] characterList;
-    private int class_index = 0;
-    private int color_index = -1;
+    private int classIndex = 0;
+    private int colorIndex = -1;
 
     private void Start()
     {
-        class_index = PlayerPrefs.GetInt("ClassSelected");
-        color_index = PlayerPrefs.GetInt("ColorSelected");
+        classIndex = PlayerPrefs.GetInt("ClassSelected");
+        colorIndex = PlayerPrefs.GetInt("ColorSelected");
 
         // presupun ca nu vor fi mai mult de 5 skinuri
         // in principiu vom avea fix 3
@@ -33,13 +33,13 @@ public class ImprovedCharSelection : MonoBehaviour
                 go.SetActive(false);
         }
 
-        if(color_index == -1 && characterList[0, class_index])
+        if(colorIndex == -1 && characterList[0, classIndex])
         {
-            characterList[0, class_index].SetActive(true);
+            characterList[0, classIndex].SetActive(true);
         }
-        else if (characterList[class_index + 1, color_index])
+        else if (characterList[classIndex + 1, colorIndex])
         {
-            characterList[class_index+1, color_index].SetActive(true);
+            characterList[classIndex+1, colorIndex].SetActive(true);
         }
            
     }
@@ -50,33 +50,33 @@ public class ImprovedCharSelection : MonoBehaviour
             transform.Rotate(new Vector3(0.0f, Input.GetAxis("Mouse X"), 0.0f));
     }
 
-    public void Select(int asked_index)
+    public void Select(int askedIndex)
     {
-        if (asked_index == class_index && color_index == -1)
+        if (askedIndex == classIndex && colorIndex == -1)
         {
             return;
         }
 
-        if (asked_index < 0 || asked_index >= 3)
+        if (askedIndex < 0 || askedIndex >= 3)
         {
             return;
         }
 
-        if(color_index == -1)
+        if(colorIndex == -1)
         {
-            if (characterList[0, class_index])
-                characterList[0, class_index].SetActive(false);
-            class_index = asked_index;
-            color_index = -1;
-            characterList[0, class_index].SetActive(true);
+            if (characterList[0, classIndex])
+                characterList[0, classIndex].SetActive(false);
+            classIndex = askedIndex;
+            colorIndex = -1;
+            characterList[0, classIndex].SetActive(true);
         }
         else
         {
-            if (characterList[class_index + 1, color_index])
-                characterList[class_index + 1, color_index].SetActive(false);
-            class_index = asked_index;
-            color_index = -1;
-            characterList[0, class_index].SetActive(true);
+            if (characterList[classIndex + 1, colorIndex])
+                characterList[classIndex + 1, colorIndex].SetActive(false);
+            classIndex = askedIndex;
+            colorIndex = -1;
+            characterList[0, classIndex].SetActive(true);
         }
         
     }
@@ -84,40 +84,40 @@ public class ImprovedCharSelection : MonoBehaviour
     public void ToggleLeft()
     {
         //  Toggle off the current model
-        if(color_index == -1 && characterList[0, class_index])
-            characterList[0, class_index].SetActive(false);
+        if(colorIndex == -1 && characterList[0, classIndex])
+            characterList[0, classIndex].SetActive(false);
         else
-            characterList[class_index + 1, color_index].SetActive(false);
+            characterList[classIndex + 1, colorIndex].SetActive(false);
 
-        color_index--;
-        if (color_index < 0)
-            color_index = characterList.GetLength(1) - 1;
+        colorIndex--;
+        if (colorIndex < 0)
+            colorIndex = characterList.GetLength(1) - 1;
 
         // Toggle on the new model
-        characterList[class_index + 1, color_index].SetActive(true);
+        characterList[classIndex + 1, colorIndex].SetActive(true);
         }
 
     public void ToggleRight()
         {
         //  Toggle off the current model
-        if (color_index == -1 && characterList[0, class_index])
-            characterList[0, class_index].SetActive(false);
+        if (colorIndex == -1 && characterList[0, classIndex])
+            characterList[0, classIndex].SetActive(false);
         else
-            characterList[class_index + 1, color_index].SetActive(false);
+            characterList[classIndex + 1, colorIndex].SetActive(false);
 
-        color_index++;
-           if (color_index >= characterList.GetLength(1))
-                color_index = 0;
+        colorIndex++;
+           if (colorIndex >= characterList.GetLength(1))
+                colorIndex = 0;
 
             // Toggle on the new model
-            characterList[class_index + 1, color_index].SetActive(true);
+            characterList[classIndex + 1, colorIndex].SetActive(true);
         }
 
 
     public void StartGame()
     {
-        PlayerPrefs.SetInt("ClassSelected", class_index);
-        PlayerPrefs.SetInt("ColorSelected", color_index);
+        PlayerPrefs.SetInt("ClassSelected", classIndex);
+        PlayerPrefs.SetInt("ColorSelected", colorIndex);
         SceneManager.LoadScene("EmptyScene");
     }
 
