@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+// just to see the profile
 public class ImprovedCharSelection : MonoBehaviour
 {
     private GameObject[,] characterList;
