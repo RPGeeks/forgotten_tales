@@ -15,6 +15,8 @@ public class MovementController
     {
         this.rb = rb;
         this.cif = cif;
+
+        rb.SetMaxAngularVelocity(0);
     }
 
     public void Step(float delta)
@@ -32,30 +34,52 @@ public class MovementController
 
         if (cif.StartJump())
         {
-            rb.AddForce(Vector3.up * 3f, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * 5f, ForceMode.Impulse);
             // animationController.SwitchTo(ProcAnims.Jump);
         }
 
         if (cif.IsWalking())
         {
+            
+            /// TODO : replace rb.transform.rotation assignment with rb.MoveRotation()
+            /// ( You have to compute the difference quaternion )
+            Quaternion t = Quaternion.Euler(new Vector3(0f, cif.GetLookDirection(), 0f));
+            rb.transform.rotation = t;
+
+
             rb.MovePosition(rb.position + rb.rotation * Vector3.forward * shiftMultiplier * delta * forwardSpeed);
         }
 
         if (cif.IsWalkingBackwards())
         {
+            /// TODO : replace rb.transform.rotation assignment with rb.MoveRotation()
+            /// ( You have to compute the difference quaternion )
+            Quaternion t = Quaternion.Euler(new Vector3(0f, cif.GetLookDirection(), 0f));
+            rb.transform.rotation = t;
+
             rb.MovePosition(rb.position - rb.rotation * Vector3.forward * delta * forwardSpeed);
         }
 
-        if (cif.IsTurningRight())
+        if (cif.IsStrafingRight())
         {
+            /// TODO : replace rb.transform.rotation assignment with rb.MoveRotation()
+            /// ( You have to compute the difference quaternion )
+            Quaternion t = Quaternion.Euler(new Vector3(0f, cif.GetLookDirection(), 0f));
+            rb.transform.rotation = t;
+
             /*Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * delta);
             rb.MoveRotation(rb.rotation * deltaRotation);*/
 
             rb.MovePosition(rb.position + rb.rotation * Vector3.right * delta * forwardSpeed/2);
         }
 
-        if (cif.IsTurningLeft())
+        if (cif.IsStrafingLeft())
         {
+            /// TODO : replace rb.transform.rotation assignment with rb.MoveRotation()
+            /// ( You have to compute the difference quaternion )
+            Quaternion t = Quaternion.Euler(new Vector3(0f, cif.GetLookDirection(), 0f));
+            rb.transform.rotation = t;
+
             /*Quaternion deltaRotation = Quaternion.Euler(-m_EulerAngleVelocity * delta);
             rb.MoveRotation(rb.rotation * deltaRotation);*/
 

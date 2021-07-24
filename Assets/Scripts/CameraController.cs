@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
@@ -34,7 +34,7 @@ public class CameraController : MonoBehaviour
     void MovementCamera()
     {
 
-        if (Input.GetMouseButton(1))
+        //if (Input.GetMouseButton(1))
         {
             yAxisWorld += Input.GetAxis("Mouse X") * 5f;
             pitch -= Input.GetAxis("Mouse Y");
@@ -50,5 +50,10 @@ public class CameraController : MonoBehaviour
         {
             transform.position = player.transform.position - transform.forward * distToTarget;
         }
+    }
+
+    public float GetYAxisWorld()
+    {
+        return yAxisWorld;
     }
 }

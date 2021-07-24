@@ -15,12 +15,12 @@ public class EmptyCIF : CharacterInputFeed
         return false;
     }
 
-    public override bool IsTurningLeft()
+    public override bool IsStrafingLeft()
     {
         return false;
     }
 
-    public override bool IsTurningRight()
+    public override bool IsStrafingRight()
     {
         return false;
     }
@@ -53,5 +53,10 @@ public class EmptyCIF : CharacterInputFeed
     public override bool AttemptsAttack()
     {
         return false;
+    }
+
+    public override float GetLookDirection()
+    {
+        return 0f;
     }
 }

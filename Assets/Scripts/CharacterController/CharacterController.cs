@@ -18,13 +18,19 @@ public class CharacterController : NetworkBehaviour
     private ProceduralAnimation<HumanoidRigidRig> idleAnim;
     private ProceduralAnimation<HumanoidRigidRig> attackAnim;
 
+    
+
     void Start()
     {
+        CameraController camController;
+
+        camController = Camera.main.GetComponent<CameraController>();
+
         rb = GetComponent<Rigidbody>();
 
         if (isLocalPlayer)
         {
-            cif = new LocalKeyboardCIF();
+            cif = new LocalKeyboardCIF(camController);
         } else
         {
             cif = new EmptyCIF();
@@ -41,7 +47,7 @@ public class CharacterController : NetworkBehaviour
 
         movementController = new MovementController(rb, cif);
 
-        Camera.main.GetComponent<CameraController>().SetCameraTarget(transform);
+        camController.SetCameraTarget(transform);
     }
 
     private void Update()
