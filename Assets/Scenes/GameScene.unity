@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.34621665, g: 0.6320333, b: 0.8685483, a: 1}
+  m_IndirectSpecularColor: {r: 0.3459545, g: 0.63196796, b: 0.86859554, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -201,13 +201,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 538736010}
-  m_LocalRotation: {x: 0, y: 0.989106, z: -0, w: -0.14720519}
-  m_LocalPosition: {x: -2.48, y: 1.76, z: 21.36}
+  m_LocalRotation: {x: -0, y: -0.76373863, z: -0, w: 0.6455257}
+  m_LocalPosition: {x: 8.08, y: 0.7, z: -6.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 196.93, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -99.59, z: 0}
 --- !u!114 &538736014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,12 +233,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1160de157ac4f0941bf4863c09362380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yAxisWorld: 0
-  pitch: 0
-  distToTarget: 8
-  maxZoomOut: 50
-  maxZoomIn: 4
-  player: {fileID: 0}
+  player: {fileID: 8722320682068687327, guid: 215e7031be151c94eb6bbc45f32c28fb, type: 3}
+  position:
+    targetPosOffset: {x: 0, y: 0, z: 0}
+    lookSmooth: 100
+    distanceFromTarget: -4
+    zoomSmooth: 800
+    maxZoom: -2
+    minZoom: -15
+    smoothFollow: 1
+    smooth: 0.05
+    newDistance: -8
+    adjustmentDistance: -8
+  orbit:
+    xRotation: -20
+    yRotation: -180
+    maxXRotation: 25
+    minXRotation: -85
+    vOrbitSmooth: 450
+    hOrbitSmooth: 450
+  input:
+    ORBIT_HORIZONTAL_SNAP: OrbitHorizontalSnap
+    ZOOM: Mouse ScrollWheel
+  collision:
+    collisionLayer:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    colliding: 0
+    adjustedCameraClipPoints: []
+    desiredCameraClipPoints: []
+  debug:
+    drawDesiredCollisionLines: 0
+    drawAdjustedCollisionLines: 0
 --- !u!1001 &1041812847
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -348,7 +374,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ea0a853aff348d64fa4239ac0248e573, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
