@@ -3,25 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class HealthBar : MonoBehaviour
 {
     [SerializeField]
     private Image foregroundImage;
+    private Camera myCamera;
 
-    public void SetMaxHealth(float percent)
-    {
-        foregroundImage.fillAmount = percent;
-    }
+    public float FillAmount { get { return foregroundImage.fillAmount; } set { foregroundImage.fillAmount = value; } }
 
-    public void SetHealth(float percent)
+    private void Start()
     {
-        foregroundImage.fillAmount = percent;
+        myCamera = Camera.main;
     }
 
     private void LateUpdate()
     {
-        transform.LookAt(Camera.main.transform);
+        transform.LookAt(myCamera.transform);
         transform.Rotate(0, 180, 0);
     }
 }
