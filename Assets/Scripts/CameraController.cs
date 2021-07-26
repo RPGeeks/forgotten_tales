@@ -87,14 +87,17 @@ public class CameraController : MonoBehaviour
         zoomInput = Input.GetAxis(input.ZOOM);
     }
 
-    void Update()
+    /*void Update()
     {
         GetInput();
         ZoomInOnTarget();
-    }
+    }*/
 
-    void FixedUpdate()
+    void Update()
     {
+
+        GetInput();
+        ZoomInOnTarget();
         //moving
         MoveToTarget();
         //rotate
@@ -136,7 +139,7 @@ public class CameraController : MonoBehaviour
 
             if(position.smoothFollow)
             {
-                transform.position = Vector3.SmoothDamp(transform.position, adjustedDestination, ref camVel, position.smooth);
+                transform.position = Vector3.SmoothDamp(transform.position, adjustedDestination, ref camVel, position.smooth * Time.deltaTime);
             }
             else
             {
@@ -147,7 +150,7 @@ public class CameraController : MonoBehaviour
         {
             if (position.smoothFollow)
             {
-                transform.position = Vector3.SmoothDamp(transform.position, destination, ref camVel, position.smooth);
+                transform.position = Vector3.SmoothDamp(transform.position, destination, ref camVel, position.smooth * Time.deltaTime);
             }
             else
             {

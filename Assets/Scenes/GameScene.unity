@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3459545, g: 0.63196796, b: 0.86859554, a: 1}
+  m_IndirectSpecularColor: {r: 0.34623224, g: 0.6320802, b: 0.8685965, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -236,7 +236,7 @@ MonoBehaviour:
   player: {fileID: 8722320682068687327, guid: 215e7031be151c94eb6bbc45f32c28fb, type: 3}
   position:
     targetPosOffset: {x: 0, y: 0, z: 0}
-    lookSmooth: 100
+    lookSmooth: 500
     distanceFromTarget: -4
     zoomSmooth: 800
     maxZoom: -2
