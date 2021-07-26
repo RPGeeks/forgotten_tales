@@ -14,11 +14,15 @@ public abstract class CharacterInputFeed
 
     public abstract bool IsWalkingBackwards();
 
-    public abstract bool IsTurningLeft();
+    public abstract bool IsStrafingLeft();
 
-    public abstract bool IsTurningRight();
+    public abstract bool IsStrafingRight();
 
     public abstract bool IsSprinting();
 
     public abstract bool IsCrouching();
+
+    public abstract bool AttemptsAttack();
+
+    public abstract float GetLookDirection();
 }

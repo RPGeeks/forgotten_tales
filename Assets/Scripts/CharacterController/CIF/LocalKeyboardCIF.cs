@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class LocalKeyboardCIF : CharacterInputFeed
 {
+    private CameraController camController;
+
+    public LocalKeyboardCIF(CameraController camController)
+    {
+        this.camController = camController;
+    }
+
+    public override float GetLookDirection()
+    {
+        return camController.GetYAxisWorld();
+    }
+
     public override bool IsCrouching()
     {
         if (Input.GetKey(KeyCode.LeftControl))
@@ -22,7 +34,7 @@ public class LocalKeyboardCIF : CharacterInputFeed
         return false;
     }
 
-    public override bool IsTurningLeft()
+    public override bool IsStrafingLeft()
     {
         if (Input.GetKey(KeyCode.A))
         {
@@ -31,7 +43,7 @@ public class LocalKeyboardCIF : CharacterInputFeed
         return false;
     }
 
-    public override bool IsTurningRight()
+    public override bool IsStrafingRight()
     {
         if (Input.GetKey(KeyCode.D))
         {
@@ -79,6 +91,15 @@ public class LocalKeyboardCIF : CharacterInputFeed
     public override bool StartJump()
     {
         if (Input.GetKeyDown(KeyCode.Space))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public override bool AttemptsAttack()
+    {
+        if (Input.GetMouseButtonDown(0))
         {
             return true;
         }

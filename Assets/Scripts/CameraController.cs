@@ -77,6 +77,7 @@ public class CameraController : MonoBehaviour
         collision.UpdateCameraClipPoints(transform.position, transform.rotation, ref collision.adjustedCameraClipPoints);
         collision.UpdateCameraClipPoints(destination, transform.rotation, ref collision.adjustedCameraClipPoints);
 
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void GetInput()
@@ -172,7 +173,7 @@ public class CameraController : MonoBehaviour
             orbit.yRotation = -180f;
         }
 
-        if (Input.GetMouseButton(1))
+        //if (Input.GetMouseButton(1))
         {
             orbit.xRotation += -vOrbitInput * orbit.vOrbitSmooth * Time.deltaTime;
             orbit.yRotation += hOrbitInput * orbit.hOrbitSmooth * Time.deltaTime;
@@ -314,5 +315,10 @@ public class CameraController : MonoBehaviour
                 colliding = false;
             }
         }
+    }
+
+    public float GetYAxisWorld()
+    {
+        return 180f + orbit.yRotation;
     }
 }
