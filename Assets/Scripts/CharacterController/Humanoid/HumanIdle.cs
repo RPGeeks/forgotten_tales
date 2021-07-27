@@ -7,13 +7,6 @@ public class HumanIdle : ProceduralAnimation<HumanoidRigidRig>
     private HumanoidRigidRig rig;
     private CharacterInputFeed cif;
 
-    private Vector3 initialHeadPos;
-    private Vector3 initialChestPos;
-    private Vector3 initialBeltPos;
-    private Vector3 initialPantsPos;
-    private Vector3 initialLeftHandPos;
-    private Vector3 initialRightHandPos;
-
     private float t = 0;
 
     public HumanIdle(HumanoidRigidRig rig, CharacterInputFeed cif)
@@ -26,16 +19,6 @@ public class HumanIdle : ProceduralAnimation<HumanoidRigidRig>
 
     public override void OnAnimationStart() 
     {
-        // TODO : Create an initial pose transform list that is globally-accessible 
-        // ( So you can create mathematically-defined animations
-        // based on the difference between your desired pose and the initial pose ).
-        initialHeadPos = rig.head.localPosition;
-        initialChestPos = rig.chest.localPosition;
-        initialBeltPos = rig.belt.localPosition;
-        initialPantsPos = rig.pants.localPosition;
-        initialLeftHandPos = rig.leftHand.localPosition;
-        initialRightHandPos = rig.rightHand.localPosition;
-
         t = 0;
     }
 
@@ -49,37 +32,37 @@ public class HumanIdle : ProceduralAnimation<HumanoidRigidRig>
 
         rig.head.localPosition = new Vector3(
         rig.head.localPosition.x,
-        Yrot1 + initialHeadPos.y,
+        Yrot1 + HumanoidRigInitialPose.instance.head.y,
         rig.head.localPosition.z
         );
 
         rig.chest.localPosition = new Vector3(
         rig.chest.localPosition.x,
-        Yrot + initialChestPos.y,
+        Yrot + HumanoidRigInitialPose.instance.chest.y,
         rig.chest.localPosition.z
         );
 
         rig.belt.localPosition = new Vector3(
         rig.belt.localPosition.x,
-        Yrot + initialBeltPos.y,
+        Yrot + HumanoidRigInitialPose.instance.belt.y,
         rig.belt.localPosition.z
         );
 
         rig.pants.localPosition = new Vector3(
         rig.pants.localPosition.x,
-        Yrot + initialPantsPos.y,
+        Yrot + HumanoidRigInitialPose.instance.pants.y,
         rig.pants.localPosition.z
         );
 
         rig.leftHand.localPosition = new Vector3(
         rig.leftHand.localPosition.x,
-        Yrot + initialLeftHandPos.y,
+        Yrot + HumanoidRigInitialPose.instance.leftHand.y,
         rig.leftHand.localPosition.z
         );
 
         rig.rightHand.localPosition = new Vector3(
         rig.rightHand.localPosition.x,
-        Yrot + initialRightHandPos.y,
+        Yrot + HumanoidRigInitialPose.instance.rightHand.y,
         rig.rightHand.localPosition.z
         );
     }
