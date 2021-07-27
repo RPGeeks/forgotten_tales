@@ -18,8 +18,6 @@ public class CharacterController : NetworkBehaviour
     private ProceduralAnimation<HumanoidRigidRig> idleAnim;
     private ProceduralAnimation<HumanoidRigidRig> attackAnim;
 
-    
-
     void Start()
     {
         CameraController camController;
@@ -32,6 +30,7 @@ public class CharacterController : NetworkBehaviour
         {
             cif = new LocalKeyboardCIF(camController);
             camController.SetCameraTarget(transform);
+            HumanoidRigInitialPose.SetupInstance(rigParts);
         } else
         {
             cif = GetComponent<CIFSync>();// new NetworkedCIF();
