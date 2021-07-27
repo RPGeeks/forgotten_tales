@@ -2,48 +2,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-// just to see the profile
+using System;
+
 public class ImprovedCharSelection : MonoBehaviour
 {
+    private GameObject[] knights;
+    private GameObject[] archers;
+    private GameObject[] mages;
     private GameObject[,] characterList;
     private int classIndex = 0;
-    private int colorIndex = -1;
+    private int colorIndex = 0;
+    private GameObject spawnObject;
+    private Transform spawnTransform;
 
     private void Start()
     {
-        classIndex = PlayerPrefs.GetInt("ClassSelected");
-        colorIndex = PlayerPrefs.GetInt("ColorSelected");
+        // characterList is a matrix where I save all the skins 
+        // on the first row knights
+        // second archers 
+        // third mages
 
-        // presupun ca nu vor fi mai mult de 5 skinuri
-        // in principiu vom avea fix 3
-        characterList = new GameObject[transform.childCount, 3];
-        
-        for(int j = 0; j < transform.childCount; j++)
+        knights = Resources.LoadAll<GameObject>("KnightSkins");
+        archers = Resources.LoadAll<GameObject>("ArcherSkins");
+        mages = Resources.LoadAll<GameObject>("MageSkins");
+
+        characterList = new GameObject[3, Math.Max(Math.Max(knights.Length, archers.Length), mages.Length) ];
+
+        for (int skin = 0; skin < knights.Length; skin++)
         {
-            Transform child = transform.GetChild(j);
-            for (int i = 0; i < child.transform.childCount; i++)
-            {
-                characterList[j, i] = child.transform.GetChild(i).gameObject;
-            }
+            characterList[0, skin] = knights[skin];
         }
-        
-        foreach(GameObject go in characterList)
+        for (int skin = 0; skin < archers.Length; skin++)
         {
-            if (go != null)
-                go.SetActive(false);
+            characterList[1, skin] = archers[skin];
+        }
+        for (int skin = 0; skin < mages.Length; skin++)
+        {
+            characterList[2, skin] = mages[skin];
         }
 
-        if(colorIndex == -1 && characterList[0, classIndex])
-        {
-            characterList[0, classIndex].SetActive(true);
-        }
-        else if (characterList[classIndex + 1, colorIndex])
-        {
-            characterList[classIndex+1, colorIndex].SetActive(true);
-        }
-           
+        spawnObject = GameObject.Find("SpawnPoint");
+        spawnTransform = spawnObject.transform;
+        GameObject.Instantiate(characterList[0, 0], spawnTransform);
+
     }
 
+    
     private void Update()
     {
         if (Input.GetMouseButton(0))
@@ -52,7 +56,7 @@ public class ImprovedCharSelection : MonoBehaviour
 
     public void Select(int askedIndex)
     {
-        if (askedIndex == classIndex && colorIndex == -1)
+        if (askedIndex == classIndex && colorIndex == 0)
         {
             return;
         }
@@ -62,56 +66,70 @@ public class ImprovedCharSelection : MonoBehaviour
             return;
         }
 
-        if(colorIndex == -1)
-        {
-            if (characterList[0, classIndex])
-                characterList[0, classIndex].SetActive(false);
-            classIndex = askedIndex;
-            colorIndex = -1;
-            characterList[0, classIndex].SetActive(true);
-        }
-        else
-        {
-            if (characterList[classIndex + 1, colorIndex])
-                characterList[classIndex + 1, colorIndex].SetActive(false);
-            classIndex = askedIndex;
-            colorIndex = -1;
-            characterList[0, classIndex].SetActive(true);
-        }
-        
+        colorIndex = 0;
+        if (characterList[classIndex, colorIndex])
+            Destroy(spawnTransform.GetChild(0).gameObject);
+        classIndex = askedIndex;
+        GameObject.Instantiate(characterList[classIndex, colorIndex], spawnTransform);
     }
 
     public void ToggleLeft()
     {
-        //  Toggle off the current model
-        if(colorIndex == -1 && characterList[0, classIndex])
-            characterList[0, classIndex].SetActive(false);
-        else
-            characterList[classIndex + 1, colorIndex].SetActive(false);
+        //  Destroy the current model
+        if(characterList[classIndex, colorIndex])
+            Destroy(spawnTransform.GetChild(0).gameObject);
 
         colorIndex--;
-        if (colorIndex < 0)
-            colorIndex = characterList.GetLength(1) - 1;
+        switch (classIndex)
+        {
+            case 0:
+                if (colorIndex < 0)
+                    colorIndex = knights.Length - 1;
+                break;
+            case 1:
+                if (colorIndex < 0)
+                    colorIndex = archers.Length - 1;
+                break;
+            case 2:
+                if (colorIndex < 0)
+                    colorIndex = mages.Length - 1;
+                break;
+            default:
+                break;
+        }
 
         // Toggle on the new model
-        characterList[classIndex + 1, colorIndex].SetActive(true);
-        }
+        GameObject.Instantiate(characterList[classIndex, colorIndex], spawnTransform);
+    }
 
     public void ToggleRight()
-        {
-        //  Toggle off the current model
-        if (colorIndex == -1 && characterList[0, classIndex])
-            characterList[0, classIndex].SetActive(false);
-        else
-            characterList[classIndex + 1, colorIndex].SetActive(false);
+    {
+        // Destroy the Old Model 
+        if (characterList[classIndex, colorIndex])
+            Destroy(spawnTransform.GetChild(0).gameObject);
 
         colorIndex++;
-           if (colorIndex >= characterList.GetLength(1))
-                colorIndex = 0;
-
-            // Toggle on the new model
-            characterList[classIndex + 1, colorIndex].SetActive(true);
+        switch (classIndex)
+        {
+            case 0:
+                if (colorIndex >= knights.Length)
+                    colorIndex = 0;
+                break;
+            case 1:
+                if (colorIndex >= archers.Length)
+                    colorIndex = 0;
+                break;
+            case 2:
+                if (colorIndex >= mages.Length)
+                    colorIndex = 0;
+                break;
+            default:
+                break;
         }
+
+        // Toggle on the new model
+        GameObject.Instantiate(characterList[classIndex, colorIndex], spawnTransform);
+    }
 
 
     public void StartGame()
@@ -120,5 +138,4 @@ public class ImprovedCharSelection : MonoBehaviour
         PlayerPrefs.SetInt("ColorSelected", colorIndex);
         SceneManager.LoadScene("EmptyScene");
     }
-
 }
