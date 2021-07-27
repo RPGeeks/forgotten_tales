@@ -1417,9 +1417,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac456110f913ce24bad04c2c193b4b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knights: []
-  archers: []
-  mages: []
 --- !u!1 &809703309
 GameObject:
   m_ObjectHideFlags: 0
