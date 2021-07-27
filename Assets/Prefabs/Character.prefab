@@ -149,10 +149,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  leftFoot: {fileID: 2366360525663476023}
-  rightFoot: {fileID: 6570057554944877747}
-  leftHand: {fileID: 2562376470706569929}
-  rightHand: {fileID: 5167105332675332603}
+  rigParts:
+    head: {fileID: 3178442963952025359}
+    chest: {fileID: 8063739089647429939}
+    belt: {fileID: 8107041182242193031}
+    pants: {fileID: 6982184435923764631}
+    leftFoot: {fileID: 850342774223103732}
+    rightFoot: {fileID: 735446005886969758}
+    leftHand: {fileID: 8233510611383499443}
+    rightHand: {fileID: 6727609259259669116}
+    leftShoulder: {fileID: 737596146878127204}
+    rightShoulder: {fileID: 1337587338611568220}
 --- !u!114 &8681396540556774358
 MonoBehaviour:
   m_ObjectHideFlags: 0
