@@ -9,7 +9,7 @@ public class CharacterController : NetworkBehaviour
 
     private Rigidbody rb;
 
-    private CharacterInputFeed cif;
+    public CharacterInputFeed cif;
 
     private ProceduralAnimationController<HumanoidRigidRig> animationController;
     private MovementController movementController;
@@ -31,9 +31,10 @@ public class CharacterController : NetworkBehaviour
         if (isLocalPlayer)
         {
             cif = new LocalKeyboardCIF(camController);
+            camController.SetCameraTarget(transform);
         } else
         {
-            cif = new EmptyCIF();
+            cif = GetComponent<CIFSync>();// new NetworkedCIF();
         }
 
         animationController = new ProceduralAnimationController<HumanoidRigidRig>(cif, rigParts);
@@ -46,8 +47,6 @@ public class CharacterController : NetworkBehaviour
         //animationController.SwitchTo(attackAnim);
 
         movementController = new MovementController(rb, cif);
-
-        camController.SetCameraTarget(transform);
     }
 
     private void Update()
@@ -84,6 +83,10 @@ public class CharacterController : NetworkBehaviour
         
 
         animationController.Step(Time.deltaTime);
-        movementController.Step(Time.deltaTime);
+
+        if ( isLocalPlayer)
+        {
+            movementController.Step(Time.deltaTime);
+        }
     }
 }

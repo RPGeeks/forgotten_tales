@@ -5,57 +5,57 @@ using UnityEngine;
 // Character Input Feed that does nothing. Used for debugging / testing / development.
 public class EmptyCIF : CharacterInputFeed
 {
-    public override bool IsCrouching()
+    public bool IsCrouching()
     {
         return false;
     }
 
-    public override bool IsSprinting()
+    public bool IsSprinting()
     {
         return false;
     }
 
-    public override bool IsStrafingLeft()
+    public bool IsStrafingLeft()
     {
         return false;
     }
 
-    public override bool IsStrafingRight()
+    public bool IsStrafingRight()
     {
         return false;
     }
 
-    public override bool IsWalking()
+    public bool IsWalking()
     {
         return false;
     }
 
-    public override bool IsWalkingBackwards()
+    public bool IsWalkingBackwards()
     {
         return false;
     }
 
-    public override bool JustStartedWalking()
+    public bool JustStartedWalking()
     {
         return false;
     }
 
-    public override bool JustStoppedWalking()
+    public bool JustStoppedWalking()
     {
         return false;
     }
 
-    public override bool StartJump()
+    public bool StartJump()
     {
         return false;
     }
 
-    public override bool AttemptsAttack()
+    public bool AttemptsAttack()
     {
         return false;
     }
 
-    public override float GetLookDirection()
+    public float GetLookDirection()
     {
         return 0f;
     }

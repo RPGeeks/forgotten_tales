@@ -11,12 +11,12 @@ public class LocalKeyboardCIF : CharacterInputFeed
         this.camController = camController;
     }
 
-    public override float GetLookDirection()
+    public float GetLookDirection()
     {
         return camController.GetYAxisWorld();
     }
 
-    public override bool IsCrouching()
+    public bool IsCrouching()
     {
         if (Input.GetKey(KeyCode.LeftControl))
         {
@@ -25,7 +25,7 @@ public class LocalKeyboardCIF : CharacterInputFeed
         return false;
     }
 
-    public override bool IsSprinting()
+    public bool IsSprinting()
     {
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -34,7 +34,7 @@ public class LocalKeyboardCIF : CharacterInputFeed
         return false;
     }
 
-    public override bool IsStrafingLeft()
+    public bool IsStrafingLeft()
     {
         if (Input.GetKey(KeyCode.A))
         {
@@ -43,7 +43,7 @@ public class LocalKeyboardCIF : CharacterInputFeed
         return false;
     }
 
-    public override bool IsStrafingRight()
+    public bool IsStrafingRight()
     {
         if (Input.GetKey(KeyCode.D))
         {
@@ -52,7 +52,7 @@ public class LocalKeyboardCIF : CharacterInputFeed
         return false;
     }
 
-    public override bool IsWalking()
+    public bool IsWalking()
     {
         if (Input.GetKey(KeyCode.W))
         {
@@ -61,7 +61,7 @@ public class LocalKeyboardCIF : CharacterInputFeed
         return false;
     }
 
-    public override bool IsWalkingBackwards()
+    public bool IsWalkingBackwards()
     {
         if (Input.GetKey(KeyCode.S))
         {
@@ -70,7 +70,7 @@ public class LocalKeyboardCIF : CharacterInputFeed
         return false;
     }
 
-    public override bool JustStartedWalking()
+    public bool JustStartedWalking()
     {
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.W))
         {
@@ -79,7 +79,7 @@ public class LocalKeyboardCIF : CharacterInputFeed
         return false;
     }
 
-    public override bool JustStoppedWalking()
+    public bool JustStoppedWalking()
     {
         if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.W))
         {
@@ -88,7 +88,7 @@ public class LocalKeyboardCIF : CharacterInputFeed
         return false;
     }
 
-    public override bool StartJump()
+    public bool StartJump()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -97,7 +97,7 @@ public class LocalKeyboardCIF : CharacterInputFeed
         return false;
     }
 
-    public override bool AttemptsAttack()
+    public bool AttemptsAttack()
     {
         if (Input.GetMouseButtonDown(0))
         {
