@@ -63,7 +63,7 @@ public class CIFSync : NetworkBehaviour, CharacterInputFeed
             }
 
             // TODO : create a condition for 360 to 0 turns. ( Because clock arithmetic .. )
-            if ( Mathf.Abs( Mathf.Abs(lookDirection) - Mathf.Abs(inputSource.GetLookDirection())) > epsilon)
+            if ( Mathf.DeltaAngle(lookDirection, inputSource.GetLookDirection()) > epsilon)
             {
                 lookDirection = inputSource.GetLookDirection();
                 CMDLookDirection(lookDirection);
