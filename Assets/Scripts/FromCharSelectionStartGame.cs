@@ -11,7 +11,8 @@ public class FromCharSelectionStartGame : MonoBehaviour
     private GameObject[] mages;
     private GameObject[,] characterList;
     private int classIndex = 0;
-    private int colorIndex = 0;
+    private int raceIndex = 0;
+    private int genderIndex = 0;
     private GameObject spawnObject;
     private Transform spawnTransform;
 
@@ -22,7 +23,8 @@ public class FromCharSelectionStartGame : MonoBehaviour
         // second archers 
         // third mages
         classIndex = PlayerPrefs.GetInt("ClassSelected", classIndex);
-        colorIndex = PlayerPrefs.GetInt("ColorSelected", colorIndex);
+        raceIndex = PlayerPrefs.GetInt("RaceSelected", raceIndex);
+        genderIndex = PlayerPrefs.GetInt("GenderSelected", genderIndex);
 
         knights = Resources.LoadAll<GameObject>("KnightSkins");
         archers = Resources.LoadAll<GameObject>("ArcherSkins");
@@ -45,7 +47,7 @@ public class FromCharSelectionStartGame : MonoBehaviour
 
         spawnObject = GameObject.Find("SpawnPoint");
         spawnTransform = spawnObject.transform;
-        GameObject.Instantiate(characterList[classIndex, colorIndex], spawnTransform);
+        GameObject.Instantiate(characterList[classIndex, 2 * raceIndex + genderIndex], spawnTransform);
     }
 
     // Update is called once per frame
