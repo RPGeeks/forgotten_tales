@@ -55,8 +55,10 @@ public class ImprovedCharSelection : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftArrow))
             transform.Rotate(new Vector3(0.0f, transform.localRotation.eulerAngles.x + 0.2f, 0.0f));
-         if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow))
             transform.Rotate(new Vector3(0.0f, transform.localRotation.eulerAngles.x - 0.2f, 0.0f));
+        if (Input.GetMouseButton(0))
+            transform.Rotate(new Vector3(0.0f, Input.GetAxis("Mouse X") * 2.5f, 0.0f));
     }
 
     public void SelectClass(int askedIndex)
