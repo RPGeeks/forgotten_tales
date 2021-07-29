@@ -49,7 +49,7 @@ namespace RPGeeks.Items
 
             for (int i = 0; i < _inventorySize; i++)
             {
-                if (itemSlots[i].MatchItem(itemSlot) && i == 0)
+                if (itemSlots[i].MatchItem(itemSlot))
                 {
                     int slotRemainingSpace = itemSlots[i].RemainingSpace;
                     int quantityToAdd = slotRemainingSpace >= itemSlot.Quantity
