@@ -19,20 +19,25 @@ namespace RPGeeks.HUDS
             set { slotItem = value; UpdateSlotUI(); }
         }
 
-        public bool AddItem(HUDItem itemToAdd)
+        public bool AddItem(HUDItem item)
         {
-            if (SlotItem != null) { return false; }
+            if (SlotItem != null) 
+            { 
+                return false;
+            }
 
-            SlotItem = itemToAdd;
-
+            SlotItem = item;
             return true;
         }
 
         public void UseSlot(int index)
         {
-            if (index != SlotIndex) { return; }
+            if (index != SlotIndex) 
+            {
+                return; 
+            }
 
-            //Use item
+            //TODO Use item
         }
 
         public override void OnDrop(PointerEventData eventData)
@@ -68,7 +73,6 @@ namespace RPGeeks.HUDS
             ItemImage.sprite = SlotItem.Icon;
 
             EnableSlotUI(true);
-
             SetItemQuantityUI();
         }
 

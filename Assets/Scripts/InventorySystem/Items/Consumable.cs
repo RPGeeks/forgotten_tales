@@ -4,18 +4,19 @@ using UnityEngine;
 
 namespace RPGeeks.Items
 {
+    [System.Serializable]
     [CreateAssetMenu(fileName = "New Consumable Item", menuName = "Items/Consumable Item")]
     public class Consumable: InventoryItem
     {
         [Header("Consumable Data")]
-        [SerializeField] private string useText = "Does something, maybe?";
+        [SerializeField] private string description = "<Consumable description>";
 
-        public override string ShowText()
+        public override string ShowInfo()
         {
             StringBuilder builder = new StringBuilder();
 
-            builder.Append(Rarity.Name).AppendLine();
-            builder.Append("<color=green>Use: ").Append(useText).Append("</color>").AppendLine();
+            builder.Append(Rarity).AppendLine();
+            builder.Append(RarityText(description)).AppendLine();
             builder.Append("Max Stack: ").Append(MaxStack).AppendLine();
             builder.Append("Sell Price: ").Append(SellPrice).Append(" Gold");
 

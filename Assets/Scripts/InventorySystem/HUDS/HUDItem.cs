@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public abstract class HUDItem : ScriptableObject
 {
     [Header("Item Info")]
@@ -10,9 +11,9 @@ public abstract class HUDItem : ScriptableObject
 
     public string Name { get => name; }
 
-    public abstract string Rare { get; }
+    public abstract string Rarity { get; }
 
-    public Sprite Icon { get => Icon; }
+    public Sprite Icon { get => icon; }
 
-    public abstract string ShowText();
+    public abstract string ShowInfo();
 }

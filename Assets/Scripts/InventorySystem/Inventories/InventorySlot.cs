@@ -11,13 +11,32 @@ namespace RPGeeks.Inventories
         [SerializeField] private Inventory inventory = null;
         [SerializeField] private TextMeshProUGUI itemQuantityText = null;
 
-        public override HUDItem SlotItem
+        public override HUDItem SlotItem { get => ItemSlot.Item; set{} }
+
+        public ItemSlot ItemSlot { get => inventory.ItemContainer.GetSlotByIndex(SlotIndex); }
+
+        protected override void Start()
         {
-            get { return ItemSlot.Item; }
-            set { }
+            inventory = inventory != null
+                ? inventory
+                : Resources.Load<Inventory>("Data/Inventory");
+
+            itemQuantityText = itemQuantityText != null 
+                ? itemQuantityText 
+                : transform.Find("Item").Find("QuantityText").GetComponent<TextMeshProUGUI>();
+
+            base.Start();
         }
 
-        public ItemSlot ItemSlot => inventory.ItemContainer.GetSlotByIndex(SlotIndex);
+        private void OnEnable()
+        {
+            inventory.onInventoryUpdated += UpdateSlotUI;
+        }
+
+        private void OnDisable()
+        {
+            inventory.onInventoryUpdated -= UpdateSlotUI;
+        }
 
         public override void OnDrop(PointerEventData eventData)
         {

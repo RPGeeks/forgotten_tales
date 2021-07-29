@@ -54,7 +54,7 @@ namespace RPGeeks.Items
             StringBuilder builder = new StringBuilder();
 
             builder.Append("<size=35>").Append(infoItem.Name).Append("</size>\n");
-            builder.Append(infoItem.ShowText());
+            builder.Append(infoItem.ShowInfo());
 
             infoText.text = builder.ToString();
 

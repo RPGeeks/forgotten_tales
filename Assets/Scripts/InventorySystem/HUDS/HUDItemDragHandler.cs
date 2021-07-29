@@ -14,7 +14,7 @@ namespace RPGeeks.HUDS
 
                 if (eventData.hovered.Count == 0)
                 {
-                    (SlotUI as HUDSlot).SlotItem = null;
+                    (itemSlotUI as HUDSlot).SlotItem = null;
                 }
             }
         }
