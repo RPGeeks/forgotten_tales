@@ -183,7 +183,7 @@ public class CameraController : MonoBehaviour
 
         //if (Input.GetMouseButton(1))
         {
-            orbit.xRotation += -vOrbitInput * orbit.vOrbitSmooth * Time.deltaTime;
+            orbit.xRotation += vOrbitInput * orbit.vOrbitSmooth * Time.deltaTime;
             orbit.yRotation += hOrbitInput * orbit.hOrbitSmooth * Time.deltaTime;
         }
 
