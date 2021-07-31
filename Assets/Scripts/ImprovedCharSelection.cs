@@ -89,6 +89,8 @@ public class ImprovedCharSelection : MonoBehaviour
 
     public void StartGame()
     {
+        // TODO : also remember the name, and fetch PlayerPrefs data when the screen begins
+        // so you have the same setup as the last time you played the game.
         PlayerPrefs.SetInt("ClassSelected", (int)chosenClass);
         PlayerPrefs.SetInt("RaceSelected", (int)chosenRace);
         PlayerPrefs.SetInt("GenderSelected", (int)chosenGender);
