@@ -1819,6 +1819,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterPreview: {fileID: 5386078263772640877}
+  nameField: {fileID: 288334372}
 --- !u!1 &1022451495
 GameObject:
   m_ObjectHideFlags: 0

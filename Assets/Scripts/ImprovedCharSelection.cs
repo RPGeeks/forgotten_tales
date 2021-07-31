@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
+using TMPro;
 
 public enum Gender
 {
@@ -34,12 +35,18 @@ public class ImprovedCharSelection : MonoBehaviour
     private Gender chosenGender;
 
     [SerializeField] private GameObject characterPreview;
+    [SerializeField] private TMP_InputField nameField;
 
     private PreviewCharacter previewCharacter;
 
     private void Start()
     {
         previewCharacter = characterPreview.GetComponent<PreviewCharacter>();
+
+        SelectClass(PlayerPrefs.GetInt("ClassSelected", 0));
+        SelectRace(PlayerPrefs.GetInt("RaceSelected", 0));
+        SelectGender(PlayerPrefs.GetInt("GenderSelected", 0));
+        nameField.text = PlayerPrefs.GetString("NameSelected", "Character name...");
     }
 
     private void Update()
@@ -89,11 +96,10 @@ public class ImprovedCharSelection : MonoBehaviour
 
     public void StartGame()
     {
-        // TODO : also remember the name, and fetch PlayerPrefs data when the screen begins
-        // so you have the same setup as the last time you played the game.
         PlayerPrefs.SetInt("ClassSelected", (int)chosenClass);
         PlayerPrefs.SetInt("RaceSelected", (int)chosenRace);
         PlayerPrefs.SetInt("GenderSelected", (int)chosenGender);
+        PlayerPrefs.SetString("NameSelected", nameField.text);
         SceneManager.LoadScene("OfflineScene");
     }
 }
