@@ -4,61 +4,52 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 
+public enum Gender
+{
+    Male,
+    Female,
+    AttackHelicopter
+}
+
+public enum CharacterClass
+{
+    Knight,
+    Archer,
+    Mage
+}
+
+public enum CharacterRace
+{
+    Human,
+    Orc,
+    Dwarf,
+    Elf,
+    Danari
+}
+
 public class ImprovedCharSelection : MonoBehaviour
 {
-    public GameObject[] knights;
-    public GameObject[] archers;
-    public GameObject[] mages;
-    private GameObject[,] characterList;
-    private int classIndex = 0;
-    private int raceIndex = 0;
-    private int genderIndex = 0;
-    private GameObject spawnObject;
-    private Transform spawnTransform;
+    private CharacterClass chosenClass;
+    private CharacterRace chosenRace;
+    private Gender chosenGender;
+
+    [SerializeField] private GameObject characterPreview;
+
+    private PreviewCharacter previewCharacter;
 
     private void Start()
     {
-        // characterList is a matrix where I save all the skins 
-        // on the first row knights
-        // second archers 
-        // third mages
-
-        knights = Resources.LoadAll<GameObject>("KnightSkins");
-        archers = Resources.LoadAll<GameObject>("ArcherSkins");
-        mages = Resources.LoadAll<GameObject>("MageSkins");
-
-        characterList = new GameObject[3, Math.Max(Math.Max(knights.Length, archers.Length), mages.Length) ];
-
-        for (int skin = 0; skin < knights.Length; skin++)
-        {
-            characterList[0, skin] = knights[skin];
-        }
-
-        for (int skin = 0; skin < archers.Length; skin++)
-        {
-            characterList[1, skin] = archers[skin];
-        }
-        
-        for (int skin = 0; skin < mages.Length; skin++)
-        {
-            characterList[2, skin] = mages[skin];
-        }
-
-        spawnObject = GameObject.Find("SpawnPoint");
-        spawnTransform = spawnObject.transform;
-        GameObject.Instantiate(characterList[0, 0], spawnTransform);
-
+        previewCharacter = characterPreview.GetComponent<PreviewCharacter>();
     }
 
-    
     private void Update()
     {
         if (Input.GetKey(KeyCode.LeftArrow))
-            transform.Rotate(new Vector3(0.0f, transform.localRotation.eulerAngles.x + 0.2f, 0.0f));
+            characterPreview.transform.Rotate(new Vector3(0.0f, transform.localRotation.eulerAngles.x + 0.2f, 0.0f));
         if (Input.GetKey(KeyCode.RightArrow))
-            transform.Rotate(new Vector3(0.0f, transform.localRotation.eulerAngles.x - 0.2f, 0.0f));
+            characterPreview.transform.Rotate(new Vector3(0.0f, transform.localRotation.eulerAngles.x - 0.2f, 0.0f));
         if (Input.GetMouseButton(0))
-            transform.Rotate(new Vector3(0.0f, Input.GetAxis("Mouse X") * 2.5f, 0.0f));
+            characterPreview.transform.Rotate(new Vector3(0.0f, - Input.GetAxis("Mouse X") * 7.5f, 0.0f));
     }
 
     public void SelectClass(int askedIndex)
@@ -68,10 +59,7 @@ public class ImprovedCharSelection : MonoBehaviour
             return;
         }
 
-        if (characterList[classIndex, 2 * raceIndex + genderIndex])
-            Destroy(spawnTransform.GetChild(0).gameObject);
-        classIndex = askedIndex;
-        GameObject.Instantiate(characterList[classIndex, 2 * raceIndex + genderIndex], spawnTransform);
+        chosenClass = (CharacterClass)askedIndex;
     }
 
     public void SelectRace(int askedIndex)
@@ -81,10 +69,9 @@ public class ImprovedCharSelection : MonoBehaviour
             return;
         }
 
-        if (characterList[classIndex, 2 * raceIndex + genderIndex])
-            Destroy(spawnTransform.GetChild(0).gameObject);
-        raceIndex = askedIndex;
-        GameObject.Instantiate(characterList[classIndex, 2 * raceIndex + genderIndex], spawnTransform);
+        chosenRace = (CharacterRace)askedIndex;
+
+        previewCharacter.ChangeHeadTo(chosenGender, chosenRace);
     }
 
     public void SelectGender(int askedIndex)
@@ -92,77 +79,21 @@ public class ImprovedCharSelection : MonoBehaviour
         if (askedIndex < 0 || askedIndex >= 2)
         {
             return;
+
         }
 
-        if (characterList[classIndex, 2 * raceIndex + genderIndex])
-            Destroy(spawnTransform.GetChild(0).gameObject);
-        genderIndex = askedIndex;
-        GameObject.Instantiate(characterList[classIndex, 2 * raceIndex + genderIndex], spawnTransform);
-    }
+        chosenGender = (Gender)askedIndex;
 
-    public void ToggleLeft()
-    {
-        //  Destroy the current model
-        if(characterList[classIndex, raceIndex])
-            Destroy(spawnTransform.GetChild(0).gameObject);
-
-        raceIndex--;
-        switch (classIndex)
-        {
-            case 0:
-                if (raceIndex < 0)
-                    raceIndex = knights.Length - 1;
-                break;
-            case 1:
-                if (raceIndex < 0)
-                    raceIndex = archers.Length - 1;
-                break;
-            case 2:
-                if (raceIndex < 0)
-                    raceIndex = mages.Length - 1;
-                break;
-            default:
-                break;
-        }
-
-        // Toggle on the new model
-        GameObject.Instantiate(characterList[classIndex, raceIndex], spawnTransform);
-    }
-
-    public void ToggleRight()
-    {
-        // Destroy the Old Model 
-        if (characterList[classIndex, raceIndex])
-            Destroy(spawnTransform.GetChild(0).gameObject);
-
-        raceIndex++;
-        switch (classIndex)
-        {
-            case 0:
-                if (raceIndex >= knights.Length)
-                    raceIndex = 0;
-                break;
-            case 1:
-                if (raceIndex >= archers.Length)
-                    raceIndex = 0;
-                break;
-            case 2:
-                if (raceIndex >= mages.Length)
-                    raceIndex = 0;
-                break;
-            default:
-                break;
-        }
-
-        // Toggle on the new model
-        GameObject.Instantiate(characterList[classIndex, raceIndex], spawnTransform);
+        previewCharacter.ChangeHeadTo(chosenGender, chosenRace);
     }
 
     public void StartGame()
     {
-        PlayerPrefs.SetInt("ClassSelected", classIndex);
-        PlayerPrefs.SetInt("RaceSelected", raceIndex);
-        PlayerPrefs.SetInt("GenderSelected", genderIndex);
+        // TODO : also remember the name, and fetch PlayerPrefs data when the screen begins
+        // so you have the same setup as the last time you played the game.
+        PlayerPrefs.SetInt("ClassSelected", (int)chosenClass);
+        PlayerPrefs.SetInt("RaceSelected", (int)chosenRace);
+        PlayerPrefs.SetInt("GenderSelected", (int)chosenGender);
         SceneManager.LoadScene("OfflineScene");
     }
 }

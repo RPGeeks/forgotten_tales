@@ -15,4 +15,44 @@ public class HeadPrefabs : ScriptableObject
     public GameObject elf_female;
     public GameObject orc_male;
     public GameObject orc_female;
+
+    public GameObject GetHead(Gender gender, CharacterRace race)
+    {
+        if (gender == Gender.Male)
+        {
+            switch (race)
+            {
+                case CharacterRace.Human:
+                    return human_male;
+                case CharacterRace.Dwarf:
+                    return dwarf_male;
+                case CharacterRace.Danari:
+                    return danari_male;
+                case CharacterRace.Elf:
+                    return elf_male;
+                case CharacterRace.Orc:
+                    return orc_male;
+            }
+        }
+
+        if (gender == Gender.Female)
+        {
+            switch (race)
+            {
+                case CharacterRace.Human:
+                    return human_female;
+                case CharacterRace.Dwarf:
+                    return dwarf_female;
+                case CharacterRace.Danari:
+                    return danari_female;
+                case CharacterRace.Elf:
+                    return elf_female;
+                case CharacterRace.Orc:
+                    return orc_female;
+            }
+        }
+
+        // default
+        return human_male;
+    }
 }
