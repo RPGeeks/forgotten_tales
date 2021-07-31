@@ -37,6 +37,7 @@ public class VirtualInput : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             ChatManager.instance.inputField.Select();
+            //ChatManager.instance.UnFade();
         }
     }
 }
