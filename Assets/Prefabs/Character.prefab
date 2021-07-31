@@ -162,6 +162,7 @@ MonoBehaviour:
     rightHand: {fileID: 6727609259259669116}
     leftShoulder: {fileID: 737596146878127204}
     rightShoulder: {fileID: 1337587338611568220}
+  headPrefabs: {fileID: 11400000, guid: 3979897cfb502a04bb5c91b9238ade13, type: 2}
 --- !u!114 &8681396540556774358
 MonoBehaviour:
   m_ObjectHideFlags: 0

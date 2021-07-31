@@ -7,6 +7,8 @@ public class CharacterController : NetworkBehaviour
 {
     [SerializeField] private HumanoidRigidRig rigParts;
 
+    [SerializeField] private HeadPrefabs headPrefabs;
+
     private Rigidbody rb;
 
     public CharacterInputFeed cif;
@@ -46,6 +48,15 @@ public class CharacterController : NetworkBehaviour
         //animationController.SwitchTo(attackAnim);
 
         movementController = new MovementController(rb, cif);
+
+        ChangeHeadTo(headPrefabs.orc_male);
+    }
+
+    private void ChangeHeadTo(GameObject newHeadPrefab)
+    {
+        GameObject newHead = Instantiate(newHeadPrefab, transform);
+        Destroy(rigParts.head.gameObject);
+        rigParts.head = newHead.transform;
     }
 
     private void Update()
