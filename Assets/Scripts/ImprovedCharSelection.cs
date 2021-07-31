@@ -163,6 +163,6 @@ public class ImprovedCharSelection : MonoBehaviour
         PlayerPrefs.SetInt("ClassSelected", classIndex);
         PlayerPrefs.SetInt("RaceSelected", raceIndex);
         PlayerPrefs.SetInt("GenderSelected", genderIndex);
-        SceneManager.LoadScene("EmptyScene");
+        SceneManager.LoadScene("OfflineScene");
     }
 }
