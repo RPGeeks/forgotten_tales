@@ -3,17 +3,20 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - GenderSelector
+  - RaceSelector
+  - ClassSelector
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Background
   - Water
   - UI
-  - 
-  - 
-  - 
+  - 1
+  - Not Seen
+  - 2
   - 
   - 
   - 
@@ -38,6 +41,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 231306913
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: 1
+    uniqueID: 2882860689
     locked: 0
