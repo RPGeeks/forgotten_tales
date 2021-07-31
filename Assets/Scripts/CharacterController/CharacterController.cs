@@ -49,11 +49,16 @@ public class CharacterController : NetworkBehaviour
 
         movementController = new MovementController(rb, cif);
 
-        ChangeHeadTo(headPrefabs.orc_male);
+        CharacterRace race = (CharacterRace)PlayerPrefs.GetInt("RaceSelected", 0);
+        Gender gender = (Gender)PlayerPrefs.GetInt("GenderSelected", 0);
+
+        ChangeHeadTo(gender, race);
     }
 
-    private void ChangeHeadTo(GameObject newHeadPrefab)
+    public void ChangeHeadTo(Gender gender, CharacterRace race)
     {
+        GameObject newHeadPrefab = headPrefabs.GetHead(gender, race);
+
         GameObject newHead = Instantiate(newHeadPrefab, transform);
         Destroy(rigParts.head.gameObject);
         rigParts.head = newHead.transform;

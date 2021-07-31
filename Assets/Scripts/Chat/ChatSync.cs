@@ -7,11 +7,15 @@ public class ChatSync : NetworkBehaviour
 {
     private static event Action<string> OnMessage;
 
+    private static string userName = "player";
+
     // Called when the a client is connected to the server
     public override void OnStartAuthority()
     {
         OnMessage += HandleNewMessage;
         ChatManager.instance.OnInputMessage += Send;
+
+        CmdSendNickname(PlayerPrefs.GetString("NameSelected", "player"));
     }
 
     // Called when a client has exited the server
@@ -37,11 +41,17 @@ public class ChatSync : NetworkBehaviour
         CmdSendMessage(message);
     }
 
+    private void CmdSendNickname(string nickname)
+    {
+        userName = nickname;
+    }
+
     [Command]
     private void CmdSendMessage(string message)
     {
         // Validate message
-        RpcHandleMessage($"[{connectionToClient.connectionId}]:  {message}");
+        // ({connectionToClient.connectionId}) -- add this for connection ID
+        RpcHandleMessage($"[<color=green>{userName}</color>]:  {message}");
     }
 
     [ClientRpc]
