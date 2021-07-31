@@ -33,6 +33,11 @@ public class CharacterController : NetworkBehaviour
             cif = new LocalKeyboardCIF(camController);
             camController.SetCameraTarget(transform);
             HumanoidRigInitialPose.SetupInstance(rigParts);
+
+            CharacterRace race = (CharacterRace)PlayerPrefs.GetInt("RaceSelected", 0);
+            Gender gender = (Gender)PlayerPrefs.GetInt("GenderSelected", 0);
+
+            ChangeHeadTo(gender, race);
         } else
         {
             cif = GetComponent<CIFSync>();// new NetworkedCIF();
@@ -48,11 +53,6 @@ public class CharacterController : NetworkBehaviour
         //animationController.SwitchTo(attackAnim);
 
         movementController = new MovementController(rb, cif);
-
-        CharacterRace race = (CharacterRace)PlayerPrefs.GetInt("RaceSelected", 0);
-        Gender gender = (Gender)PlayerPrefs.GetInt("GenderSelected", 0);
-
-        ChangeHeadTo(gender, race);
     }
 
     public void ChangeHeadTo(Gender gender, CharacterRace race)
