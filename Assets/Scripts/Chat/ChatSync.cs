@@ -41,7 +41,7 @@ public class ChatSync : NetworkBehaviour
     private void CmdSendMessage(string message)
     {
         // Validate message
-        RpcHandleMessage($"[{connectionToClient.connectionId}]: {message}");
+        RpcHandleMessage($"[{connectionToClient.connectionId}]:  {message}");
     }
 
     [ClientRpc]
