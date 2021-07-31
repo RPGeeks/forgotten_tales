@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8325e57b2123c224d9804ccd075bc765, type: 3}
+  m_Name: HeadPrefabs
+  m_EditorClassIdentifier: 
+  human_male: {fileID: 3786697411471797379, guid: ee57ca9bbbc19584e8f1665ede3c54c5, type: 3}
+  human_female: {fileID: 6020937037441619350, guid: 989dec6d0123e484f9c1f20b80e8cff8, type: 3}
+  dwarf_male: {fileID: 1380973889646032788, guid: 466e099a23748c44f8bb67915bc546b3, type: 3}
+  dwarf_female: {fileID: 6858125801332774119, guid: a175c5f2454ed7d48ad976573a9cbf8b, type: 3}
+  danari_male: {fileID: 7479611844313084981, guid: d4aa94608d409d84589c6d361a257811, type: 3}
+  danari_female: {fileID: 7759660831154339410, guid: 31b0da20a4ea2634eae7e82480955e75, type: 3}
+  elf_male: {fileID: 2199087644259023909, guid: 6584d050b42008e499d7b5c95e02045c, type: 3}
+  elf_female: {fileID: 4691918578864846920, guid: 793307c86300f3c4aa2cb02dfd8803b8, type: 3}
+  orc_male: {fileID: 6914130439032681066, guid: 3cdf1d9ae7f46ef4b99a13712e76745a, type: 3}
+  orc_female: {fileID: 1762321359849614833, guid: 2d0a0a7590762ef45907dfe0a30f1eae, type: 3}
