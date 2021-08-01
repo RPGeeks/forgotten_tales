@@ -20,7 +20,7 @@ public class NpcInteraction : NetworkBehaviour
 
         if (isClient && isLocalPlayer)
         {
-            if (Input.GetKeyDown(KeyCode.G))
+            if (Input.GetKeyDown(KeyCode.G) && VirtualInput.IsGameInput)
             {
                 CreateDoggy();
             }
