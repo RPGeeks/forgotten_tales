@@ -7,7 +7,7 @@ public class ChatSync : NetworkBehaviour
 {
     private static event Action<string> OnMessage;
 
-    private static string userName = "player";
+    private string userName = "player";
 
     // Called when the a client is connected to the server
     public override void OnStartAuthority()
@@ -41,6 +41,7 @@ public class ChatSync : NetworkBehaviour
         CmdSendMessage(message);
     }
 
+    [Command]
     private void CmdSendNickname(string nickname)
     {
         userName = nickname;

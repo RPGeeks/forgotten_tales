@@ -5,9 +5,7 @@ using UnityEngine;
 
 public class CharacterController : NetworkBehaviour
 {
-    [SerializeField] private HumanoidRigidRig rigParts;
-
-    [SerializeField] private HeadPrefabs headPrefabs;
+    public HumanoidRigidRig rigParts;
 
     private Rigidbody rb;
 
@@ -33,12 +31,10 @@ public class CharacterController : NetworkBehaviour
             cif = new LocalKeyboardCIF(camController);
             camController.SetCameraTarget(transform);
             HumanoidRigInitialPose.SetupInstance(rigParts);
-
-            CharacterRace race = (CharacterRace)PlayerPrefs.GetInt("RaceSelected", 0);
-            Gender gender = (Gender)PlayerPrefs.GetInt("GenderSelected", 0);
-
-            ChangeHeadTo(gender, race);
-        } else
+            
+            GetComponent<CharacterOutfitSync>().LocalInit();
+        }
+        else
         {
             cif = GetComponent<CIFSync>();// new NetworkedCIF();
         }
@@ -53,15 +49,6 @@ public class CharacterController : NetworkBehaviour
         //animationController.SwitchTo(attackAnim);
 
         movementController = new MovementController(rb, cif);
-    }
-
-    public void ChangeHeadTo(Gender gender, CharacterRace race)
-    {
-        GameObject newHeadPrefab = headPrefabs.GetHead(gender, race);
-
-        GameObject newHead = Instantiate(newHeadPrefab, transform);
-        Destroy(rigParts.head.gameObject);
-        rigParts.head = newHead.transform;
     }
 
     private void Update()
