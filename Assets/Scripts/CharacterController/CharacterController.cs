@@ -20,6 +20,45 @@ public class CharacterController : NetworkBehaviour
     private ProceduralAnimation<HumanoidRigidRig> idleAnim;
     private ProceduralAnimation<HumanoidRigidRig> attackAnim;
 
+    // ---Head sync functionality---
+    [SyncVar(hook = nameof(SetGender))]
+    int genderIndex = 0;
+
+    [SyncVar(hook = nameof(SetRace))]
+    int raceIndex = 0;
+
+    [Command]
+    public void CmdSetGender(int _genderIndex)
+    {
+        this.genderIndex = _genderIndex;
+    }
+
+    [Command]
+    public void CmdSetRace(int _raceIndex)
+    {
+        this.raceIndex = _raceIndex;
+    }
+
+    [Command]
+    public void CmdSetGenderAndRace(int _genderIndex, int _raceIndex)
+    {
+        this.genderIndex = _genderIndex;
+        this.raceIndex = _raceIndex;
+    }
+
+    // Clientside SyncVar hook
+    void SetGender(int oldGender, int newGender)
+    {
+        ChangeHeadTo(newGender, raceIndex);
+    }
+
+    // Clientside SyncVar hook
+    void SetRace(int oldRace, int newRace)
+    {
+        ChangeHeadTo(genderIndex, newRace);
+    }
+    // End of ---Head sync functionality---
+
     void Start()
     {
         CameraController camController;
@@ -34,11 +73,14 @@ public class CharacterController : NetworkBehaviour
             camController.SetCameraTarget(transform);
             HumanoidRigInitialPose.SetupInstance(rigParts);
 
-            CharacterRace race = (CharacterRace)PlayerPrefs.GetInt("RaceSelected", 0);
-            Gender gender = (Gender)PlayerPrefs.GetInt("GenderSelected", 0);
+            raceIndex = PlayerPrefs.GetInt("RaceSelected", 0);
+            genderIndex = PlayerPrefs.GetInt("GenderSelected", 0);
 
-            ChangeHeadTo(gender, race);
-        } else
+            CmdSetGenderAndRace(genderIndex, raceIndex);
+
+            ChangeHeadTo(genderIndex, raceIndex);
+        }
+        else
         {
             cif = GetComponent<CIFSync>();// new NetworkedCIF();
         }
@@ -55,9 +97,16 @@ public class CharacterController : NetworkBehaviour
         movementController = new MovementController(rb, cif);
     }
 
-    public void ChangeHeadTo(Gender gender, CharacterRace race)
+    int genderCache = 0;
+    int raceCache = 0;
+    public void ChangeHeadTo(int gender, int race)
     {
-        GameObject newHeadPrefab = headPrefabs.GetHead(gender, race);
+        if (gender == genderCache && race == raceCache) { return; }
+
+        genderCache = gender;
+        raceCache = race;
+
+        GameObject newHeadPrefab = headPrefabs.GetHead((Gender)gender, (CharacterRace)race);
 
         GameObject newHead = Instantiate(newHeadPrefab, transform);
         Destroy(rigParts.head.gameObject);
