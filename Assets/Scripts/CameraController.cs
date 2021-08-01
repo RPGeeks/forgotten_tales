@@ -76,16 +76,24 @@ public class CameraController : MonoBehaviour
         collision.Initialize(Camera.main);
         collision.UpdateCameraClipPoints(transform.position, transform.rotation, ref collision.adjustedCameraClipPoints);
         collision.UpdateCameraClipPoints(destination, transform.rotation, ref collision.adjustedCameraClipPoints);
-
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void GetInput()
     {
-        vOrbitInput = Input.GetAxis("Mouse Y");
-        hOrbitInput = Input.GetAxis("Mouse X");
-        hOrbitSnapInput = Input.GetAxis(input.ORBIT_HORIZONTAL_SNAP);
-        zoomInput = Input.GetAxis(input.ZOOM);
+        if (VirtualInput.IsGameInput)
+        {
+            vOrbitInput = Input.GetAxis("Mouse Y");
+            hOrbitInput = Input.GetAxis("Mouse X");
+            hOrbitSnapInput = Input.GetAxis(input.ORBIT_HORIZONTAL_SNAP);
+            zoomInput = Input.GetAxis(input.ZOOM);
+        } else
+        {
+            vOrbitInput = 0;
+            hOrbitInput = 0;
+            hOrbitSnapInput = 0;
+            zoomInput = 0;
+        }
+        
     }
 
     /*void Update()
@@ -175,7 +183,7 @@ public class CameraController : MonoBehaviour
 
         //if (Input.GetMouseButton(1))
         {
-            orbit.xRotation += -vOrbitInput * orbit.vOrbitSmooth * Time.deltaTime;
+            orbit.xRotation += vOrbitInput * orbit.vOrbitSmooth * Time.deltaTime;
             orbit.yRotation += hOrbitInput * orbit.hOrbitSmooth * Time.deltaTime;
         }
 

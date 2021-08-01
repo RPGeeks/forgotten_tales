@@ -18,6 +18,8 @@ public class LocalKeyboardCIF : CharacterInputFeed
 
     public bool IsCrouching()
     {
+        if (!VirtualInput.IsGameInput) { return false; }
+
         if (Input.GetKey(KeyCode.LeftControl))
         {
             return true;
@@ -27,6 +29,8 @@ public class LocalKeyboardCIF : CharacterInputFeed
 
     public bool IsSprinting()
     {
+        if (!VirtualInput.IsGameInput) { return false; }
+
         if (Input.GetKey(KeyCode.LeftShift))
         {
             return true;
@@ -36,6 +40,8 @@ public class LocalKeyboardCIF : CharacterInputFeed
 
     public bool IsStrafingLeft()
     {
+        if (!VirtualInput.IsGameInput) { return false; }
+
         if (Input.GetKey(KeyCode.A))
         {
             return true;
@@ -45,6 +51,8 @@ public class LocalKeyboardCIF : CharacterInputFeed
 
     public bool IsStrafingRight()
     {
+        if (!VirtualInput.IsGameInput) { return false; }
+
         if (Input.GetKey(KeyCode.D))
         {
             return true;
@@ -54,6 +62,8 @@ public class LocalKeyboardCIF : CharacterInputFeed
 
     public bool IsWalking()
     {
+        if (!VirtualInput.IsGameInput) { return false; }
+
         if (Input.GetKey(KeyCode.W))
         {
             return true;
@@ -63,6 +73,8 @@ public class LocalKeyboardCIF : CharacterInputFeed
 
     public bool IsWalkingBackwards()
     {
+        if (!VirtualInput.IsGameInput) { return false; }
+
         if (Input.GetKey(KeyCode.S))
         {
             return true;
@@ -72,6 +84,8 @@ public class LocalKeyboardCIF : CharacterInputFeed
 
     public bool JustStartedWalking()
     {
+        if (!VirtualInput.IsGameInput) { return false; }
+
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.W))
         {
             return true;
@@ -81,6 +95,8 @@ public class LocalKeyboardCIF : CharacterInputFeed
 
     public bool JustStoppedWalking()
     {
+        if (!VirtualInput.IsGameInput) { return false; }
+
         if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.W))
         {
             return true;
@@ -90,6 +106,8 @@ public class LocalKeyboardCIF : CharacterInputFeed
 
     public bool StartJump()
     {
+        if (!VirtualInput.IsGameInput) { return false; }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             return true;
@@ -99,6 +117,8 @@ public class LocalKeyboardCIF : CharacterInputFeed
 
     public bool AttemptsAttack()
     {
+        if (!VirtualInput.IsGameInput) { return false; }
+
         if (Input.GetMouseButtonDown(0))
         {
             return true;
