@@ -25,7 +25,7 @@ public class FollowTarget : NetworkBehaviour
    // Update is called once per frame
     void Update()
     {
-        if (hasAuthority)
+        if (isServer)
         {
             nav.SetDestination(target.position);
         }
