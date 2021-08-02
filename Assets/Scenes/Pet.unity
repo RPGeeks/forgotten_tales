@@ -191,6 +191,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5595992963716518163, guid: 9583bb12619cc874a860a9647d02fcfa, type: 3}
+      propertyPath: sceneId
+      value: 738099376
+      objectReference: {fileID: 0}
     - target: {fileID: 4587153454691610610, guid: 9583bb12619cc874a860a9647d02fcfa, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -590,7 +594,6 @@ Light:
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!4 &1974572644
