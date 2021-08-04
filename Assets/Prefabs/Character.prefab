@@ -247,6 +247,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   dogPrefab: {fileID: 7139644725918915300, guid: 9583bb12619cc874a860a9647d02fcfa, type: 3}
+  catPrefab: {fileID: 8350302432720980784, guid: a341d394e3ed7644ebd1c8da8424ed53, type: 3}
 --- !u!1 &1829394559928826755
 GameObject:
   m_ObjectHideFlags: 0
