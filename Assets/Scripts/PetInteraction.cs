@@ -14,16 +14,16 @@ public class PetInteraction : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (triggering)
-        {
-            if (Input.GetKeyDown(KeyCode.F3))
-            {
-                Sit();
-            }
-        }
 
         if (isClient && isLocalPlayer)
         {
+            if (triggering)
+            {
+                if (Input.GetKeyDown(KeyCode.F3))
+                {
+                    CmdSit();
+                }
+            }
             if (Input.GetKeyDown(KeyCode.F1))
             {
                 CreateDoggy();
@@ -33,10 +33,16 @@ public class PetInteraction : NetworkBehaviour
                 CreateCat();
             }
         }
-        
-    }
-    
 
+    }
+
+    [Command]
+    private void CmdSit()
+    {
+        Sit();
+    }
+
+    [ClientRpc]
     private void Sit()
     {
         // Pet will sit if it's in Idle animation
