@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3067026891832379862}
+  - component: {fileID: 6395139638981201390}
   m_Layer: 0
   m_Name: acacia_4
   m_TagString: Untagged
@@ -24,13 +25,26 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2439706461711700844}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 44.975586, y: -7.009302, z: 128.66943}
+  m_LocalPosition: {x: 44.975586, y: -2.3, z: 128.66943}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children:
   - {fileID: 2513132320998848654}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6395139638981201390
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2439706461711700844}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5529513, y: 2.9938524, z: 0.53098375}
+  m_Center: {x: 0.0023575784, y: 1.5038394, z: 0.00811882}
 --- !u!1 &6653611024810142645
 GameObject:
   m_ObjectHideFlags: 0
