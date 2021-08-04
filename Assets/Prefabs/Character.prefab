@@ -79,6 +79,7 @@ GameObject:
   - component: {fileID: 4525912901458338577}
   - component: {fileID: 3810793535953307038}
   - component: {fileID: 2283005665951570485}
+  - component: {fileID: 9103432500992431842}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -163,7 +164,6 @@ MonoBehaviour:
     rightHand: {fileID: 6727609259259669116}
     leftShoulder: {fileID: 737596146878127204}
     rightShoulder: {fileID: 1337587338611568220}
-  headPrefabs: {fileID: 11400000, guid: 3979897cfb502a04bb5c91b9238ade13, type: 2}
 --- !u!114 &8681396540556774358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,6 +248,21 @@ MonoBehaviour:
   syncInterval: 0.1
   dogPrefab: {fileID: 7139644725918915300, guid: 9583bb12619cc874a860a9647d02fcfa, type: 3}
   catPrefab: {fileID: 8350302432720980784, guid: a341d394e3ed7644ebd1c8da8424ed53, type: 3}
+--- !u!114 &9103432500992431842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165599374016723119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b79ec97cb7312084b9bc344a32c8ed9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  headPrefabs: {fileID: 11400000, guid: 3979897cfb502a04bb5c91b9238ade13, type: 2}
 --- !u!1 &1829394559928826755
 GameObject:
   m_ObjectHideFlags: 0
