@@ -4,8 +4,22 @@ using UnityEngine;
 
 public class LocalKeyboardCIF : CharacterInputFeed
 {
-    public override bool IsCrouching()
+    private CameraController camController;
+
+    public LocalKeyboardCIF(CameraController camController)
     {
+        this.camController = camController;
+    }
+
+    public float GetLookDirection()
+    {
+        return camController.GetYAxisWorld();
+    }
+
+    public bool IsCrouching()
+    {
+        if (!VirtualInput.IsGameInput) { return false; }
+
         if (Input.GetKey(KeyCode.LeftControl))
         {
             return true;
@@ -13,8 +27,10 @@ public class LocalKeyboardCIF : CharacterInputFeed
         return false;
     }
 
-    public override bool IsSprinting()
+    public bool IsSprinting()
     {
+        if (!VirtualInput.IsGameInput) { return false; }
+
         if (Input.GetKey(KeyCode.LeftShift))
         {
             return true;
@@ -22,8 +38,10 @@ public class LocalKeyboardCIF : CharacterInputFeed
         return false;
     }
 
-    public override bool IsTurningLeft()
+    public bool IsStrafingLeft()
     {
+        if (!VirtualInput.IsGameInput) { return false; }
+
         if (Input.GetKey(KeyCode.A))
         {
             return true;
@@ -31,8 +49,10 @@ public class LocalKeyboardCIF : CharacterInputFeed
         return false;
     }
 
-    public override bool IsTurningRight()
+    public bool IsStrafingRight()
     {
+        if (!VirtualInput.IsGameInput) { return false; }
+
         if (Input.GetKey(KeyCode.D))
         {
             return true;
@@ -40,8 +60,10 @@ public class LocalKeyboardCIF : CharacterInputFeed
         return false;
     }
 
-    public override bool IsWalking()
+    public bool IsWalking()
     {
+        if (!VirtualInput.IsGameInput) { return false; }
+
         if (Input.GetKey(KeyCode.W))
         {
             return true;
@@ -49,8 +71,10 @@ public class LocalKeyboardCIF : CharacterInputFeed
         return false;
     }
 
-    public override bool IsWalkingBackwards()
+    public bool IsWalkingBackwards()
     {
+        if (!VirtualInput.IsGameInput) { return false; }
+
         if (Input.GetKey(KeyCode.S))
         {
             return true;
@@ -58,8 +82,10 @@ public class LocalKeyboardCIF : CharacterInputFeed
         return false;
     }
 
-    public override bool JustStartedWalking()
+    public bool JustStartedWalking()
     {
+        if (!VirtualInput.IsGameInput) { return false; }
+
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.W))
         {
             return true;
@@ -67,8 +93,10 @@ public class LocalKeyboardCIF : CharacterInputFeed
         return false;
     }
 
-    public override bool JustStoppedWalking()
+    public bool JustStoppedWalking()
     {
+        if (!VirtualInput.IsGameInput) { return false; }
+
         if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.W))
         {
             return true;
@@ -76,9 +104,22 @@ public class LocalKeyboardCIF : CharacterInputFeed
         return false;
     }
 
-    public override bool StartJump()
+    public bool StartJump()
     {
+        if (!VirtualInput.IsGameInput) { return false; }
+
         if (Input.GetKeyDown(KeyCode.Space))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool AttemptsAttack()
+    {
+        if (!VirtualInput.IsGameInput) { return false; }
+
+        if (Input.GetMouseButtonDown(0))
         {
             return true;
         }
