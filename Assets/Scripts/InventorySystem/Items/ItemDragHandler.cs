@@ -8,17 +8,20 @@ namespace RPGeeks.Items
     public class ItemDragHandler : NetworkBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] protected SlotUI itemSlotUI = null;
-        public delegate void OnMouseHover(HUDItem item);
-        public static event OnMouseHover onMouseStartHoverItem;
 
-        public delegate void OnMouseEnd();
-        public static event OnMouseEnd onMouseEndHoverItem;
-
+        private Canvas rootCanvas = null;
         private CanvasGroup canvasGroup = null;
         private Transform originalParent = null;
         private bool isHovering = false;
 
         public SlotUI ItemSlotUI { get => itemSlotUI; }
+
+
+        public delegate void OnMouseHover(HUDItem item);
+        public static event OnMouseHover onMouseStartHoverItem;
+
+        public delegate void OnMouseEnd();
+        public static event OnMouseEnd onMouseEndHoverItem;
 
         private void Awake()
         {
@@ -30,6 +33,8 @@ namespace RPGeeks.Items
             itemSlotUI = itemSlotUI != null 
                 ? itemSlotUI 
                 : transform.parent.GetComponent<SlotUI>();
+
+            rootCanvas = FindObjectOfType<Canvas>();
         }
 
         private void OnDisable()
@@ -45,9 +50,10 @@ namespace RPGeeks.Items
         {
             if (eventData.button == PointerEventData.InputButton.Left)
             {
+                // TODO this does nothing
                 onMouseEndHoverItem?.Invoke();
                 originalParent = transform.parent;
-                transform.SetParent(transform.parent.parent);
+                transform.SetParent(rootCanvas.transform);
                 canvasGroup.blocksRaycasts = false;
             }
         }

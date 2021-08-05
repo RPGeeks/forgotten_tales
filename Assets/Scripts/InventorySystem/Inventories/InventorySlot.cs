@@ -17,9 +17,10 @@ namespace RPGeeks.Inventories
 
         protected override void Start()
         {
+            // TODO load inventory from NetworkClient.localPlayer;
             inventory = inventory != null
                 ? inventory
-                : Resources.Load<Inventory>("Data/Inventory");
+                : Resources.Load<Inventory>("Prefabs/Data/Inventory");
 
             itemQuantityText = itemQuantityText != null 
                 ? itemQuantityText 

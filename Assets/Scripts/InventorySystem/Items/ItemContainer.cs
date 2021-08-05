@@ -168,7 +168,7 @@ namespace RPGeeks.Items
 
         public bool HasItem(InventoryItem item)
         {
-            return itemSlots.Find(itemSlot => itemSlot.Contains(item)) != null;
+            return !(itemSlots.Find(itemSlot => itemSlot.Contains(item)) is null);
 
             //foreach (ItemSlot itemSlot in itemSlots)
             //{

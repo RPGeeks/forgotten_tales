@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9f0cfe547b4f7241a147c0d48dbfec3, type: 3}
-  m_Name: Inventory
+  m_Script: {fileID: 11500000, guid: cc04908675f76ac47923f62ab343971f, type: 3}
+  m_Name: New Rarity
   m_EditorClassIdentifier: 
-  testItemSlot:
-    item: {fileID: 11400000, guid: 615d64c4fdc08354a87bc800c7116143, type: 2}
-    quantity: 0
-  inventorySize: 20
+  name: Common
+  textColor: {r: 0.3679245, g: 0.34189212, b: 0.34189212, a: 1}

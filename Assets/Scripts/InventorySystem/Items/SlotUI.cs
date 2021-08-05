@@ -8,7 +8,7 @@ namespace RPGeeks.Items
 {
     [System.Serializable]
     [RequireComponent(typeof(Image))]
-    public abstract class SlotUI : NetworkBehaviour, IDropHandler
+    public abstract class SlotUI : MonoBehaviour, IDropHandler
     {
         [SerializeField] protected Sprite sprite;
         protected Image ItemImage = null;
@@ -26,7 +26,7 @@ namespace RPGeeks.Items
 
         private void Awake()
         {
-            ItemImage = GetComponent<Image>();
+            ItemImage = transform.Find("Item").GetComponent<Image>();
             ItemImage.sprite = sprite;
         }
 

@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: New Consumable Item
   m_EditorClassIdentifier: 
   name: New Item
-  icon: {fileID: 21300000, guid: e2f19a600e68fae4e96542a7db121428, type: 3}
-  rarity: {fileID: 0}
+  icon: {fileID: 21300000, guid: 8f8c4752db12c694ebcf80f495441f71, type: 3}
+  prefab: {fileID: 0}
+  rarity: {fileID: 11400000, guid: a53b69f69751f1d4fb9303324b8a7278, type: 2}
   sellPrice: 1
   maxStack: 20
   description: <Consumable description>

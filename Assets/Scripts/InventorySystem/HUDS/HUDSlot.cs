@@ -19,6 +19,20 @@ namespace RPGeeks.HUDS
             set { slotItem = value; UpdateSlotUI(); }
         }
 
+        protected override void Start()
+        {
+            // TODO load inventory from NetworkClient.localPlayer;
+            inventory = inventory != null
+                ? inventory
+                : Resources.Load<Inventory>("Prefabs/Data/Inventory");
+
+            itemQuantityText = itemQuantityText != null
+                ? itemQuantityText
+                : transform.Find("Item").Find("QuantityText").GetComponent<TextMeshProUGUI>();
+
+            base.Start();
+        }
+
         public bool AddItem(HUDItem item)
         {
             if (SlotItem != null) 
