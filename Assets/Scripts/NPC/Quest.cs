@@ -7,13 +7,17 @@ public abstract class Quest : MonoBehaviour
     [HideInInspector]
     public string name = "default quest";
 
-    public List<Reward> rewards;
-    public List<Goal> goals;
+    protected List<Reward> rewards;
+    protected List<Goal> goals;
 
-    public string[] sentences;
+    private string[] sentences;
 
-    public bool completed;
+    protected bool completed;
 
+    public List<Goal> Goals { get => goals; }
+
+    public string[] Sentences { get => sentences; }
+    public int GoalsCount { get => goals.Count; }
     public void CheckGoals()
     {
         completed = goals.TrueForAll(goal => goal.Completed);
@@ -23,7 +27,7 @@ public abstract class Quest : MonoBehaviour
 
     public void GiveRewards()
     {
-        QuestManager.instance.Remove(this);
+        QuestManager.Instance.Remove(this);
 
         foreach (Goal goal in goals)
             goal.Finish();

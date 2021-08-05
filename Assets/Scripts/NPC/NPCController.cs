@@ -59,7 +59,7 @@ public class NPCController : MonoBehaviour
 
         Quest quest = quests[0];
 
-        if (!QuestManager.instance.Add(quest))
+        if (!QuestManager.Instance.Add(quest))
             return;
 
         activeQuest = quest;
@@ -80,7 +80,7 @@ public class NPCController : MonoBehaviour
     {
         if (quests.Count > 0 && name == gameObject.name)
         {
-            sentences = quests[0].sentences;
+            sentences = quests[0].Sentences;
             questDialogue = true;
         }
     }

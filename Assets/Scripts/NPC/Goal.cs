@@ -7,12 +7,14 @@ public abstract class Goal : ScriptableObject
     [HideInInspector]
     public string text = "N/A";
 
-    public int ammount;
-    public int currAmount;
-    public bool completed;
+    protected int ammount;
+    protected int currAmount;
+    protected bool completed;
 
+    public int Ammount { get => ammount; }
+    public int CurrAmount { get => currAmount; }
     public bool Completed { get => completed; set => completed = value; }
 
-    public abstract void Init();
+  
     public abstract void Finish();
 }

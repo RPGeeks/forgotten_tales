@@ -9,10 +9,10 @@ public class QuestsGrid : MonoBehaviour
     private List<QuestSlot> slots;
     public void Init()
     {
-        questManager = QuestManager.instance;
+        questManager = QuestManager.Instance;
         questManager.questsChangedCallback += AddQuests;
 
-        for (int i = 0; i < questManager.capacity; ++i)
+        for (int i = 0; i < questManager.Capacity; ++i)
             Instantiate(prefab, transform);
 
         slots = new List<QuestSlot>(GetComponentsInChildren<QuestSlot>());
@@ -22,12 +22,12 @@ public class QuestsGrid : MonoBehaviour
     {
         for (int i = 0; i < slots.Count; i++)
         {
-            if (i < questManager.goalsNo)
+            if (i < questManager.GoalsNo)
             {
-                Quest quest = questManager.quests[i];
+                Quest quest = questManager.QuestAt(i);
 
                 i--;
-                foreach (Goal goal in quest.goals)
+                foreach (Goal goal in quest.Goals)
                     slots[++i].AddItem(goal);
             }
             else

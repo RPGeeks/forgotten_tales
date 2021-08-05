@@ -12,18 +12,18 @@ public class DialogueManager : MonoBehaviour
         instance = this;
     }
 
-    string NPCName;
-    List<string> sentences;
+    private string NPCName;
+    private List<string> sentences;
 
-    Transform canvas;
-    Text dialogueText;
-    Text nameText;
+    private Transform canvas;
+    private Text dialogueText;
+    private Text nameText;
 
-    Text yesButton;
-    Text noButton;
+    private Text yesButton;
+    private Text noButton;
 
-    bool questDialogue;
-    int index;
+    private bool questDialogue;
+    private int index;
 
     public delegate void dialogueDoneEvent(string name);
     public static event dialogueDoneEvent onDialogueDone;
@@ -31,8 +31,9 @@ public class DialogueManager : MonoBehaviour
 
     void Start()
     {
-        canvas = GameObject.FindGameObjectWithTag("DialogueCanvas").transform;
+        canvas = FindObjectOfType<Canvas>().transform.Find("Dialogue UI");
         canvas.gameObject.SetActive(false);
+       
 
         dialogueText = canvas.Find("Text").GetComponent<Text>();
         nameText = canvas.Find("Name").GetComponent<Text>();

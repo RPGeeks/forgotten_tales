@@ -7,12 +7,13 @@ using UnityEngine.UI;
 
 public class QuestSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    
     [SerializeField] private Image image;
-    Sprite defaultSprite;
-    Color idleColor;
+    [SerializeField] private Sprite defaultSprite;
+    [SerializeField] private Color idleColor;
 
-    TextMeshProUGUI text;
-    TextMeshProUGUI status;
+    [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] private TextMeshProUGUI status;
 
     void Awake()
     {
@@ -27,8 +28,8 @@ public class QuestSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public void AddItem(Goal newItem)
     {
         text.text = newItem.text;
-        status.text = newItem.currAmount
-                        + "/" + newItem.ammount;
+        status.text = newItem.CurrAmount
+                        + "/" + newItem.Ammount;
     }
 
     public void RemoveItem()

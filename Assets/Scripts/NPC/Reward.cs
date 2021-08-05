@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class Reward : ScriptableObject
 {
-    public int ammount;
-    public CharacterController player;
+    protected int ammount;
+    private CharacterController player;
 
     private void Awake()
     {
