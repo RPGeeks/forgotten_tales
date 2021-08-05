@@ -11,10 +11,14 @@ public class GoldReward : Reward
 
     public override void GiveReward()
     {
-        // player.add gold 
+        // TODO Solve this
+        /* 
+         
+        player.add gold 
         Gold gold = ScriptableObject.CreateInstance<Gold>();
         gold.UpdateValue(ammount);
         InventoryManager.instance.Add(gold);
         Debug.Log("give gold");
+        */
     }
 }
