@@ -4,19 +4,18 @@ using UnityEngine;
 
 public abstract class Quest : MonoBehaviour
 {
-    [HideInInspector]
-    public string name = "default quest";
+    [SerializeField] new public string name = "<Quest name>";
 
     protected List<Reward> rewards;
     protected List<Goal> goals;
 
-    private string[] sentences;
+    [SerializeField] private List<string> sentences;
 
     protected bool completed;
 
     public List<Goal> Goals { get => goals; }
 
-    public string[] Sentences { get => sentences; }
+    public List<string> Sentences { get => sentences; }
     public int GoalsCount { get => goals.Count; }
     public void CheckGoals()
     {

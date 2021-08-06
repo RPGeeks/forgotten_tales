@@ -9,21 +9,17 @@ public class NPCController : MonoBehaviour
     [SerializeField] private GameObject exclamationMark;
     [SerializeField] private Outline outline;
    
-    
+    [SerializeField] private bool questDialogue;
+
     private List<Quest> quests;
     private Quest activeQuest;
     private bool questCompleted;
-    private bool questDialogue;
 
-    private string name;
-    private string[] sentences;
+    [SerializeField] new private string name;
+    [SerializeField] private List<string> sentences;
 
     void Start()
     {
-
-        outline = gameObject.GetComponent<Outline>();
-        outline.enabled = false;
-
         quests = new List<Quest>(gameObject.GetComponents<Quest>());
 
         exclamationMark = transform.Find("Canvas").gameObject;
@@ -49,7 +45,7 @@ public class NPCController : MonoBehaviour
         if (quests.Count <= 0)
             return;
 
-        DialogueManager.instance.AddDialogue(sentences, name, questDialogue);
+        DialogueManager.instance.AddDialogue(sentences.ToArray(), name, questDialogue);
     }
 
     public void AcceptQuest(string name)

@@ -44,11 +44,12 @@ namespace RPGeeks.Items
 
         public static bool operator ==(ItemSlot a, ItemSlot b)
         {
-            return (a is null && b is null) || a.Item == b.Item && a.Quantity == b.Quantity;
+            return (a is null && b is null) || (a.Item == b.Item && a.Quantity == b.Quantity);
         }
         public static bool operator !=(ItemSlot a, ItemSlot b)
         {
-            return !(a is null || b is null) && a.Item != b.Item || a.Quantity != b.Quantity;
+            return (a is null && !(b is null)) || (!(a is null) && b is null) ||
+                !(a is null) && !(b is null) && (a.Item != b.Item || a.Quantity != b.Quantity);
         }
 
         public override bool Equals(object obj)

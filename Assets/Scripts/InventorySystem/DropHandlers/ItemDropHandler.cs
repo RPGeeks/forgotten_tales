@@ -12,16 +12,16 @@ namespace RPGeeks.Items
 
         protected int _slotIndex = 0;
 
-        private void Start()
+        public void Init(Inventory inventory)
         {
             // TODO load inventory from NetworkClient.localPlayer;
-            inventory = inventory != null
-                ? inventory
-                : Resources.Load<Inventory>("Prefabs/Data/Inventory");
+            this.inventory ??= inventory;
             panel = transform.Find("YesNoPanel").GetComponent<YesNoPanelController>();
 
             panel.YesButton.onClick.AddListener(Drop);
             panel.NoButton.onClick.AddListener(() => gameObject.SetActive(false));
+
+            gameObject.SetActive(false);
         }
 
         protected void OnDisable()
@@ -37,6 +37,7 @@ namespace RPGeeks.Items
             gameObject.SetActive(true);
         }
 
+        // TODO synchronize this method
         public virtual void Drop()
         {
             gameObject.SetActive(false);
