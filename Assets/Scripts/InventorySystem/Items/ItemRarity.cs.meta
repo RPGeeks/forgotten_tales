@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Scripts/CharacterController/Humanoid/HumanAttack.cs.meta
+guid: fe7d8bf3a91eff84bb512395eacc6534
+=======
+guid: cc04908675f76ac47923f62ab343971f
+>>>>>>> c0d450685bae170e9f814145cc95d05fee314a01:Assets/Scripts/InventorySystem/Items/ItemRarity.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

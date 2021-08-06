@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Scripts/CharacterController/HeadPrefabs.cs.meta
 guid: 8325e57b2123c224d9804ccd075bc765
+=======
+guid: ad8ca283142322e4d929de81b1b53c4e
+>>>>>>> c0d450685bae170e9f814145cc95d05fee314a01:Assets/Scripts/InventorySystem/DropHandlers/ItemSpawn.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

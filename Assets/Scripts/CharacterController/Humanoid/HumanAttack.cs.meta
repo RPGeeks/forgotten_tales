@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Scripts/CharacterController/Humanoid/HumanAttack.cs.meta
 guid: d23fdf404b5ff2944acda3126f26b494
+=======
+guid: cc04908675f76ac47923f62ab343971f
+>>>>>>> c0d450685bae170e9f814145cc95d05fee314a01:Assets/Scripts/InventorySystem/Items/ItemRarity.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
