@@ -10,13 +10,13 @@ public abstract class Quest : MonoBehaviour
     protected List<Reward> rewards = new List<Reward>();
     protected List<Goal> goals = new List<Goal>();
 
-    [SerializeField] protected string[] sentences; //TODO add a function to add sentences make this private again
+    [SerializeField] protected List<string> sentences = new List<string>(); //TODO add a function to add sentences make this private again
 
     protected bool completed;
 
     public List<Goal> Goals { get => goals; }
 
-    public string[] Sentences { get => sentences; }
+    public List<string> Sentences { get => sentences; }
     public int GoalsCount { get => goals.Count; }
     public void CheckGoals()
     {
