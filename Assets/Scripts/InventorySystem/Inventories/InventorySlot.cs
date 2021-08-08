@@ -26,15 +26,11 @@ namespace RPGeeks.Inventories
                 ? itemQuantityText 
                 : transform.Find("Item").Find("QuantityText").GetComponent<TextMeshProUGUI>();
 
+            inventory.onInventoryUpdated += UpdateSlotUI;
             base.Start();
         }
 
-        private void OnEnable()
-        {
-            inventory.onInventoryUpdated += UpdateSlotUI;
-        }
-
-        private void OnDisable()
+        private void OnDestroy()
         {
             inventory.onInventoryUpdated -= UpdateSlotUI;
         }
