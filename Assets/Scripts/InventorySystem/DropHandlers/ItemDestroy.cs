@@ -18,7 +18,6 @@ namespace RPGeeks.Items
         public override void Drop()
         {
             inventory.ItemContainer.RemoveAt(_slotIndex);
-
             gameObject.SetActive(false);
         }
     }

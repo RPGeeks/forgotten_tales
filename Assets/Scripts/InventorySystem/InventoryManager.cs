@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryController : MonoBehaviour
+public class InventoryManager : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private GameObject inventory;

@@ -5,7 +5,7 @@ using Mirror;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private InventoryController inventoryController;
+    [SerializeField] private InventoryManager inventoryController;
     [SerializeField] private CameraController cameraController;
     [SerializeField] private CrosshairController crosshairController;
     [SerializeField] private CharacterController characterController;
@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     {
         inventoryController = inventoryController != null 
             ? inventoryController 
-            : FindObjectOfType<InventoryController>();
+            : FindObjectOfType<InventoryManager>();
         inventoryController.gameObject.SetActive(false);
 
         cameraController = cameraController != null

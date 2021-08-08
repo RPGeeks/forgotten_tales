@@ -1,7 +1,4 @@
 using RPGeeks.Inventories;
-using TMPro;
-using UnityEngine;
-using Mirror;
 
 namespace RPGeeks.Items
 {
@@ -18,13 +15,7 @@ namespace RPGeeks.Items
         public override void Drop()
         {
             ItemSlot itemSlot = inventory.ItemContainer.GetSlotByIndex(_slotIndex);
-            GameObject prefab = itemSlot.Item.Prefab;
-            
-            GameObject player = NetworkClient.localPlayer.gameObject;
-            GameObject itemDrop = Instantiate(prefab, player.transform.position, Quaternion.identity);
-            Pickup pickup = itemDrop.AddComponent<Pickup>();
-            pickup.Item = new ItemSlot(itemSlot.Item, itemSlot.Quantity);
-
+            InventoryLogic.DropSlot(this, itemSlot);
             inventory.ItemContainer.RemoveAt(_slotIndex);
 
             gameObject.SetActive(false);

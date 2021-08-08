@@ -1,4 +1,5 @@
 ﻿using RPGeeks.Inventories;
+using RPGeeks.ItemHandlers;
 using RPGeeks.Items;
 using System;
 using System.Collections.Generic;
@@ -7,12 +8,12 @@ using UnityEngine;
 namespace RPGeeks.CharacterController
 {
     [RequireComponent(typeof(SphereCollider))]
-    class PickupController : MonoBehaviour
+    class PickupController : InteractionHandler, IItemsHandler
     {
         [Header("Range")]
         [SerializeField] [Min(0.5f)] private float pickupRange = 5.0f;
+        [SerializeField] private List<Pickup> pickupsInRange;
         private SphereCollider _sphereCollider;
-        private List<Pickup> _pickupsInRange;
 
         // TODO remove this and move to CharacterInputFeed
         [SerializeField] private KeyCode pickupKey = KeyCode.E;
@@ -20,9 +21,11 @@ namespace RPGeeks.CharacterController
         [Header("Inventory")]
         [SerializeField] private Inventory inventory;
 
+        public Inventory Inventory { get => inventory; private set => inventory = value; }
+
         private void Awake()
         {
-            _pickupsInRange = new List<Pickup>();
+            pickupsInRange = new List<Pickup>();
         }
 
         private void Start()
@@ -46,19 +49,15 @@ namespace RPGeeks.CharacterController
 
         private void PickupItems()
         {
-            foreach (Pickup pickup in _pickupsInRange)
+            foreach (Pickup pickup in pickupsInRange)
             {
                 // TODO no visual feedback 
                 // Data exists but UI is not updated properly
-                ItemSlot remaining = inventory.ItemContainer.AddItem(pickup.Item);
 
-                if (remaining != null && (remaining.Quantity == 0 || remaining.IsEmpty))
-                {
-                    Destroy(pickup.gameObject);
-                    // TODO maybe add specific sound
-                }
+                // TODO fix bug -> 
+                Accept(pickup);
             }
-            _pickupsInRange.Clear();
+            pickupsInRange.Clear();
         }
 
         private void OnTriggerStay(Collider other)
@@ -67,9 +66,9 @@ namespace RPGeeks.CharacterController
             Pickup pickup = other.GetComponent<Pickup>();
             if (pickup != null)
             {
-                if (!_pickupsInRange.Contains(pickup))
+                if (!pickupsInRange.Contains(pickup))
                 {
-                    _pickupsInRange.Add(pickup);
+                    pickupsInRange.Add(pickup);
                 }
             }
         }
@@ -79,9 +78,9 @@ namespace RPGeeks.CharacterController
             Pickup pickup = other.GetComponent<Pickup>();
             if (pickup != null)
             {
-                if (_pickupsInRange.Contains(pickup))
+                if (pickupsInRange.Contains(pickup))
                 {
-                    _pickupsInRange.Remove(pickup);
+                    pickupsInRange.Remove(pickup);
                 }
             }
         }
