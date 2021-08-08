@@ -9,8 +9,9 @@ public class VirtualInput : MonoBehaviour
     {
         get {
             if (IsChatOpened) { return false; }
-
+            
             // .. additional conditions ( inventory, menus, etc. )
+            if (IsInventoryOpened) { return false; }
 
             return true;
         }
@@ -21,6 +22,14 @@ public class VirtualInput : MonoBehaviour
         get
         {
             return ChatManager.IsOpened;
+        }
+    }
+
+    public static bool IsInventoryOpened
+    {
+        get
+        {
+            return GameManager.IsInventoryOpened;
         }
     }
 

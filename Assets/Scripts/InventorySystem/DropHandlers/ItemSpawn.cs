@@ -17,10 +17,8 @@ namespace RPGeeks.Items
 
         public override void Drop()
         {
-            GameObject prefab = inventory.ItemContainer.GetSlotByIndex(_slotIndex).Item.Prefab;
-            GameObject player = NetworkClient.localPlayer.gameObject;
-            Instantiate(prefab, player.transform.position, Quaternion.identity);
-
+            ItemSlot itemSlot = inventory.ItemContainer.GetSlotByIndex(_slotIndex);
+            InventoryLogic.DropSlot(this, itemSlot);
             inventory.ItemContainer.RemoveAt(_slotIndex);
 
             gameObject.SetActive(false);

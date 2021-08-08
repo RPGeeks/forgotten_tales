@@ -24,10 +24,10 @@ public class InventoryController : MonoBehaviour
         inventory = inventory != null ? inventory : transform.Find("Scroll View").Find("Viewport").Find("Content").gameObject;
         slotPrefab = slotPrefab != null ? slotPrefab : Resources.Load<GameObject>("Prefabs/UI/Inventory/Slot");
         exitButton = exitButton != null ? exitButton : transform.Find("ExitButton").GetComponent<Button>();
-        dropHandler = dropHandler != null ? dropHandler : FindObjectOfType<ItemDropHandler>();
+        dropHandler ??= FindObjectOfType<ItemDropHandler>();
 
         // TODO load inventory from NetworkClient.localPlayer;
-        inventoryData = inventoryData != null ? inventoryData : Resources.Load<Inventory>("Prefabs/Data/Inventory");
+        inventoryData ??= Resources.Load<Inventory>("Prefabs/Data/Inventory");
         _inventorySize = inventoryData.Size;
         slots = new GameObject[_inventorySize];
 
@@ -37,16 +37,8 @@ public class InventoryController : MonoBehaviour
             slots[i] = Instantiate(slotPrefab, inventory.transform);
         }
 
-        dropHandler.gameObject.SetActive(false);
+        dropHandler.Init(inventory: inventoryData);
         exitButton.onClick.AddListener(QuitInventory);
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            gameObject.SetActive(!inventory.activeSelf);
-        }
     }
 
     public void QuitInventory()

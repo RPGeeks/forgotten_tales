@@ -1,27 +1,28 @@
 ﻿using RPGeeks.Inventories;
-using TMPro;
+using RPGeeks.ItemHandlers;
 using UnityEngine;
-using Mirror;
 
 namespace RPGeeks.Items
 {
-    public class ItemDropHandler : MonoBehaviour
+    public class ItemDropHandler : MonoBehaviour, IItemsHandler
     {
         [SerializeField] protected Inventory inventory = null;
         [SerializeField] protected YesNoPanelController panel = null;
 
         protected int _slotIndex = 0;
 
-        private void Start()
+        public Inventory Inventory { get => inventory; }
+
+        public void Init(Inventory inventory)
         {
             // TODO load inventory from NetworkClient.localPlayer;
-            inventory = inventory != null
-                ? inventory
-                : Resources.Load<Inventory>("Prefabs/Data/Inventory");
+            this.inventory ??= inventory;
             panel = transform.Find("YesNoPanel").GetComponent<YesNoPanelController>();
 
             panel.YesButton.onClick.AddListener(Drop);
             panel.NoButton.onClick.AddListener(() => gameObject.SetActive(false));
+
+            gameObject.SetActive(false);
         }
 
         protected void OnDisable()
@@ -37,6 +38,7 @@ namespace RPGeeks.Items
             gameObject.SetActive(true);
         }
 
+        // TODO synchronize this method
         public virtual void Drop()
         {
             gameObject.SetActive(false);

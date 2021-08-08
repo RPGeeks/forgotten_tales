@@ -15,7 +15,7 @@ public class QuestManager : MonoBehaviour
 
     private List<Quest> quests = new List<Quest>();
     private int goalsNo = 0;
-    private int capacity = 30;
+    [SerializeField] private int capacity = 30;
 
    
     public int GoalsNo { get => goalsNo; }

@@ -13,16 +13,12 @@ public class NPCController : MonoBehaviour
     private List<Quest> quests;
     private Quest activeQuest;
     private bool questCompleted;
-    private bool questDialogue;
 
-    private string name;
-    private string[] sentences;
+    [SerializeField] new private string name;
+    [SerializeField] private List<string> sentences;
 
     void Start()
     {
-
-      
-
         quests = new List<Quest>(gameObject.GetComponents<Quest>());
 
         exclamationMark = transform.Find("NPC Canvas").gameObject;
@@ -48,7 +44,7 @@ public class NPCController : MonoBehaviour
         if (quests.Count <= 0)
             return;
 
-        DialogueManager.instance.AddDialogue(sentences, name, questDialogue);
+        DialogueManager.instance.AddDialogue(sentences.ToArray(), name, questDialogue);
     }
 
     public void AcceptQuest(string name)
