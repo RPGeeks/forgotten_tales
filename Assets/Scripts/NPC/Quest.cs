@@ -7,10 +7,10 @@ public abstract class Quest : MonoBehaviour
     [HideInInspector]
     public string name = "default quest";
 
-    protected List<Reward> rewards;
-    protected List<Goal> goals;
+    protected List<Reward> rewards = new List<Reward>();
+    protected List<Goal> goals = new List<Goal>();
 
-    private string[] sentences;
+    [SerializeField] protected string[] sentences; //TODO add a function to add sentences make this private again
 
     protected bool completed;
 

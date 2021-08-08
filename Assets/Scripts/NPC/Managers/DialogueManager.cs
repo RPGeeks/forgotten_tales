@@ -15,7 +15,7 @@ public class DialogueManager : MonoBehaviour
     private string NPCName;
     private List<string> sentences;
 
-    private Transform canvas;
+    [SerializeField] private Transform canvas;
     private Text dialogueText;
     private Text nameText;
 
@@ -30,8 +30,8 @@ public class DialogueManager : MonoBehaviour
     public static event dialogueDoneEvent onQuestAccepted;
 
     void Start()
-    {
-        canvas = FindObjectOfType<Canvas>().transform.Find("Dialogue UI");
+    { 
+        canvas = canvas != null ? canvas : FindObjectOfType<Canvas>().transform.Find("Dialogue UI");
         canvas.gameObject.SetActive(false);
        
 

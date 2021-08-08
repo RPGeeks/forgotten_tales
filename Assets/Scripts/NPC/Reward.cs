@@ -9,8 +9,7 @@ public abstract class Reward : ScriptableObject
 
     private void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player")
-                            .GetComponent<CharacterController>();
+        player = FindObjectOfType<CharacterController>();
     }
 
     public abstract void GiveReward();

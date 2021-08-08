@@ -59,6 +59,6 @@ public class QuestManager : MonoBehaviour
 
     public void UpdateStatus()
     {
-        questsChangedCallback.Invoke();
+        questsChangedCallback?.Invoke();
     }
 }

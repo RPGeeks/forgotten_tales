@@ -7,7 +7,7 @@ using UnityEngine;
 public class NPCController : MonoBehaviour
 {
     [SerializeField] private GameObject exclamationMark;
-    [SerializeField] private Outline outline;
+ 
    
     
     private List<Quest> quests;
@@ -21,12 +21,11 @@ public class NPCController : MonoBehaviour
     void Start()
     {
 
-        outline = gameObject.GetComponent<Outline>();
-        outline.enabled = false;
+      
 
         quests = new List<Quest>(gameObject.GetComponents<Quest>());
 
-        exclamationMark = transform.Find("Canvas").gameObject;
+        exclamationMark = transform.Find("NPC Canvas").gameObject;
         if (quests.Count == 0)
             exclamationMark.SetActive(false);
 
