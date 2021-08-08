@@ -1,6 +1,5 @@
 using RPGeeks.Inventories;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace RPGeeks.Items
 {

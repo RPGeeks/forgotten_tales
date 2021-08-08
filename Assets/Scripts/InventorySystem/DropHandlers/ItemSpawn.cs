@@ -1,4 +1,7 @@
 using RPGeeks.Inventories;
+using TMPro;
+using UnityEngine;
+using Mirror;
 
 namespace RPGeeks.Items
 {

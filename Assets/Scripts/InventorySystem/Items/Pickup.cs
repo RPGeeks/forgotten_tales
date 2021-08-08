@@ -13,7 +13,7 @@ namespace RPGeeks.Items
         public GameObject GameObject { get => gameObject; }
 
         public override void Visit(InteractionHandler handler)
-        {
+    {
             if (handler as IItemsHandler != null)
             {
                 InventoryLogic.PickupItem(handler as IItemsHandler, this);
