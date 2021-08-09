@@ -12,7 +12,7 @@ namespace RPGeeks.CharacterController
     {
         [Header("Range")]
         [SerializeField] [Min(0.5f)] private float pickupRange = 5.0f;
-        [SerializeField] private List<Pickup> pickupsInRange;
+        [SerializeField] private List<Interactible> pickupsInRange;
         private SphereCollider _sphereCollider;
 
         // TODO remove this and move to CharacterInputFeed
@@ -25,7 +25,7 @@ namespace RPGeeks.CharacterController
 
         private void Awake()
         {
-            pickupsInRange = new List<Pickup>();
+            pickupsInRange = new List<Interactible>();
         }
 
         private void Start()
@@ -49,12 +49,8 @@ namespace RPGeeks.CharacterController
 
         private void PickupItems()
         {
-            foreach (Pickup pickup in pickupsInRange)
+            foreach (Interactible pickup in pickupsInRange)
             {
-                // TODO no visual feedback 
-                // Data exists but UI is not updated properly
-
-                // TODO fix bug -> 
                 Accept(pickup);
             }
             pickupsInRange.Clear();
@@ -63,7 +59,7 @@ namespace RPGeeks.CharacterController
         private void OnTriggerStay(Collider other)
         {
             // TODO maybe storing GameObjects in pickupsInRange might be more efficient
-            Pickup pickup = other.GetComponent<Pickup>();
+            Interactible pickup = other.GetComponent<Interactible>();
             if (pickup != null)
             {
                 if (!pickupsInRange.Contains(pickup))
@@ -75,7 +71,7 @@ namespace RPGeeks.CharacterController
 
         private void OnTriggerExit(Collider other)
         {
-            Pickup pickup = other.GetComponent<Pickup>();
+            Interactible pickup = other.GetComponent<Interactible>();
             if (pickup != null)
             {
                 if (pickupsInRange.Contains(pickup))

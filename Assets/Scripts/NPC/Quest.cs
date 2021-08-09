@@ -4,12 +4,13 @@ using UnityEngine;
 
 public abstract class Quest : MonoBehaviour
 {
-    [SerializeField] new public string name = "<Quest name>";
+    [HideInInspector]
+    public string name = "default quest";
 
-    protected List<Reward> rewards;
-    protected List<Goal> goals;
+    protected List<Reward> rewards = new List<Reward>();
+    protected List<Goal> goals = new List<Goal>();
 
-    [SerializeField] private List<string> sentences;
+    [SerializeField] protected List<string> sentences = new List<string>(); //TODO add a function to add sentences make this private again
 
     protected bool completed;
 

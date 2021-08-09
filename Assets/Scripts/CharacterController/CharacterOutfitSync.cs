@@ -15,6 +15,7 @@ public class CharacterOutfitSync : NetworkBehaviour
     public void LocalInit()
     {
         ConfigureHead();
+        ConfigureWeapon();
     }
 
     #region HEAD_CONFIGURATION
@@ -60,6 +61,7 @@ public class CharacterOutfitSync : NetworkBehaviour
 
     int genderCache = 0;
     int raceCache = 0;
+
     public void ChangeHeadTo(int gender, int race)
     {
         if (gender == genderCache && race == raceCache) { return; }
@@ -84,4 +86,47 @@ public class CharacterOutfitSync : NetworkBehaviour
         ChangeHeadTo(genderIndex, raceIndex);
     }
     #endregion HEAD_CONFIGURATION
+
+    #region WEAPON_CONFIGURATION
+
+    [SerializeField] private WeaponPrefabs weaponPrefabs;
+
+    [SyncVar(hook = nameof(SetClass))]
+    int classIndex = 0;
+
+    void SetClass(int oldClass, int newClass)
+    {
+        ChangeWeaponTo(newClass);
+    }
+
+    public void ChangeWeaponTo(int weapon)
+    {
+        Transform grip = rigParts.rightHand.Find("weapon-grip");
+
+
+        for (int i = grip.childCount - 1; i >= 0; i--)
+        {
+            Destroy(grip.GetChild(i).gameObject);
+        }
+
+        GameObject newWeaponPrefab = weaponPrefabs.GetWeapon((CharacterClass)weapon);
+        Instantiate(newWeaponPrefab, grip);
+    }
+
+    private void ConfigureWeapon()
+    {
+        classIndex = PlayerPrefs.GetInt("ClassSelected", 0);
+
+        CmdSetWeapon(classIndex);
+
+        ChangeWeaponTo(classIndex);
+    }
+
+    [Command]
+    public void CmdSetWeapon(int _classIndex)
+    {
+        this.classIndex = _classIndex;
+    }
+
+    #endregion WEAPON_CONFIGURATION
 }

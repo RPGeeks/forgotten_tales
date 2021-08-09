@@ -67,6 +67,8 @@ public class ImprovedCharSelection : MonoBehaviour
         }
 
         chosenClass = (CharacterClass)askedIndex;
+
+        previewCharacter.ChangeWeaponTo(chosenClass);
     }
 
     public void SelectRace(int askedIndex)

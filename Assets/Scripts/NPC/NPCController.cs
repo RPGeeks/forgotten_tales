@@ -3,17 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using Mirror;
 
-public class NPCController : MonoBehaviour
+public class NPCController : Interactible
 {
     [SerializeField] private GameObject exclamationMark;
-    [SerializeField] private Outline outline;
-   
-    [SerializeField] private bool questDialogue;
+
+    // TODO remove this after demo
+    [SerializeField] private GameObject dialogue;
 
     private List<Quest> quests;
     private Quest activeQuest;
     private bool questCompleted;
+    private bool questDialogue;
 
     [SerializeField] new private string name;
     [SerializeField] private List<string> sentences;
@@ -22,7 +24,11 @@ public class NPCController : MonoBehaviour
     {
         quests = new List<Quest>(gameObject.GetComponents<Quest>());
 
-        exclamationMark = transform.Find("Canvas").gameObject;
+        Transform canvas = transform.Find("NPC Canvas");
+        exclamationMark = canvas.Find("Image").gameObject;
+        dialogue = canvas.Find("Dialogue").gameObject;
+        dialogue.SetActive(false);
+
         if (quests.Count == 0)
             exclamationMark.SetActive(false);
 
@@ -94,5 +100,16 @@ public class NPCController : MonoBehaviour
         //QuestManager.instance.Remove(activeQuest);
         questCompleted = false;
         activeQuest = null;
+    }
+
+    public override void Visit(InteractionHandler handler)
+    {
+        // TODO use dialogue manager to print something
+        if (!questCompleted)
+        {
+            questCompleted = true;
+            exclamationMark.SetActive(false);
+            dialogue.SetActive(true);
+        }
     }
 }
