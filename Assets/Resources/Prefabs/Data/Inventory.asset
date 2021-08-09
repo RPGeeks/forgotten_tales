@@ -13,6 +13,48 @@ MonoBehaviour:
   m_Name: Inventory
   m_EditorClassIdentifier: 
   testItemSlot:
-    item: {fileID: 11400000, guid: 615d64c4fdc08354a87bc800c7116143, type: 2}
+    item: {fileID: 11400000, guid: 50d6ca96ac6dd6b44b6e44ad26e9d8de, type: 2}
     quantity: 0
   inventorySize: 20
+  itemContainer:
+    itemSlots:
+    - item: {fileID: 11400000, guid: 615d64c4fdc08354a87bc800c7116143, type: 2}
+      quantity: 7
+    - item: {fileID: 11400000, guid: 50d6ca96ac6dd6b44b6e44ad26e9d8de, type: 2}
+      quantity: 8
+    - item: {fileID: 0}
+      quantity: 0
+    - item: {fileID: 0}
+      quantity: 0
+    - item: {fileID: 0}
+      quantity: 0
+    - item: {fileID: 0}
+      quantity: 0
+    - item: {fileID: 0}
+      quantity: 0
+    - item: {fileID: 0}
+      quantity: 0
+    - item: {fileID: 0}
+      quantity: 0
+    - item: {fileID: 0}
+      quantity: 0
+    - item: {fileID: 0}
+      quantity: 0
+    - item: {fileID: 0}
+      quantity: 0
+    - item: {fileID: 0}
+      quantity: 0
+    - item: {fileID: 0}
+      quantity: 0
+    - item: {fileID: 0}
+      quantity: 0
+    - item: {fileID: 0}
+      quantity: 0
+    - item: {fileID: 0}
+      quantity: 0
+    - item: {fileID: 0}
+      quantity: 0
+    - item: {fileID: 0}
+      quantity: 0
+    - item: {fileID: 0}
+      quantity: 0

@@ -1,16 +1,17 @@
 ﻿using RPGeeks.Inventories;
-using TMPro;
+using RPGeeks.ItemHandlers;
 using UnityEngine;
-using Mirror;
 
 namespace RPGeeks.Items
 {
-    public class ItemDropHandler : MonoBehaviour
+    public class ItemDropHandler : MonoBehaviour, IItemsHandler
     {
         [SerializeField] protected Inventory inventory = null;
         [SerializeField] protected YesNoPanelController panel = null;
 
         protected int _slotIndex = 0;
+
+        public Inventory Inventory { get => inventory; }
 
         public void Init(Inventory inventory)
         {

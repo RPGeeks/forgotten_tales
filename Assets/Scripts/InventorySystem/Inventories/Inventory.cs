@@ -9,8 +9,9 @@ namespace RPGeeks.Inventories
     {
         [SerializeField] private ItemSlot testItemSlot = new ItemSlot();
         [SerializeField] private int inventorySize = 20;
+        [SerializeField] private ItemContainer itemContainer = new ItemContainer(20);
 
-        public ItemContainer ItemContainer { get; private set; } = new ItemContainer(20);
+        public ItemContainer ItemContainer { get => itemContainer; private set => itemContainer = value; }
         public int Size { get => inventorySize; }
 
         public delegate void OnInventoryUpdated();

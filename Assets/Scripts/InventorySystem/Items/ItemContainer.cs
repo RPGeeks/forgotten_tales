@@ -1,12 +1,13 @@
 using RPGeeks.Inventories;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace RPGeeks.Items
 {
     [System.Serializable]
     public class ItemContainer : ISlotHolder
     {
-        private List<ItemSlot> itemSlots;
+        [SerializeField] private List<ItemSlot> itemSlots;
         private int _inventorySize = 0;
 
         public int Size { get => _inventorySize; }
