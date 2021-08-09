@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.09662478, g: 0.35146356, b: 0.7158257, a: 1}
+  m_IndirectSpecularColor: {r: 0.0967499, g: 0.3516391, b: 0.7158562, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -14552,6 +14552,10 @@ PrefabInstance:
     - target: {fileID: 1165599374016723119, guid: 215e7031be151c94eb6bbc45f32c28fb, type: 3}
       propertyPath: m_Name
       value: Character (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1165599374016723119, guid: 215e7031be151c94eb6bbc45f32c28fb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3621676018343570686, guid: 215e7031be151c94eb6bbc45f32c28fb, type: 3}
       propertyPath: m_Enabled
@@ -70271,6 +70275,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f20d5f159576ac448b29f895c1aebddb, type: 3}
+--- !u!1 &1912803453 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7430320529577469342, guid: f20d5f159576ac448b29f895c1aebddb, type: 3}
+  m_PrefabInstance: {fileID: 1912803452}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1912803454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912803453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db8ecececaf459b478fd23e7544c9e0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camTransform: {fileID: 0}
 --- !u!1 &1914640265
 GameObject:
   m_ObjectHideFlags: 0
@@ -76341,6 +76363,10 @@ PrefabInstance:
     - target: {fileID: 1165599374016723119, guid: 215e7031be151c94eb6bbc45f32c28fb, type: 3}
       propertyPath: m_Name
       value: Character (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1165599374016723119, guid: 215e7031be151c94eb6bbc45f32c28fb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3621676018343570686, guid: 215e7031be151c94eb6bbc45f32c28fb, type: 3}
       propertyPath: m_Enabled
