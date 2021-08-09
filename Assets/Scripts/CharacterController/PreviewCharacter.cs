@@ -7,6 +7,8 @@ public class PreviewCharacter : MonoBehaviour
     [SerializeField] private HumanoidRigidRig rigParts;
 
     [SerializeField] private HeadPrefabs headPrefabs;
+
+    [SerializeField] private WeaponPrefabs weaponPrefabs;
     
     public CharacterInputFeed cif;
 
@@ -33,6 +35,19 @@ public class PreviewCharacter : MonoBehaviour
         GameObject newHead = Instantiate(newHeadPrefab, transform);
         Destroy(rigParts.head.gameObject);
         rigParts.head = newHead.transform;
+    }
+
+    public void ChangeWeaponTo(CharacterClass type)
+    {
+        Transform grip = rigParts.rightHand.Find("weapon-grip");
+
+        for (int i = grip.childCount - 1; i >= 0; i--)
+        {
+            Destroy(grip.GetChild(i).gameObject);
+        }
+
+        GameObject newWeaponPrefab = weaponPrefabs.GetWeapon(type);
+        Instantiate(newWeaponPrefab, grip);
     }
 
     private void Update()
