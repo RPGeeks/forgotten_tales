@@ -18,6 +18,10 @@ public class CharacterController : NetworkBehaviour
     private ProceduralAnimation<HumanoidRigidRig> idleAnim;
     private ProceduralAnimation<HumanoidRigidRig> attackAnim;
 
+    private CharacterOutfitSync characterOutfit;
+
+    [SerializeField] private GameObject fireballPrefab;
+
     void Start()
     {
         CameraController camController;
@@ -26,13 +30,15 @@ public class CharacterController : NetworkBehaviour
 
         rb = GetComponent<Rigidbody>();
 
+        characterOutfit = GetComponent<CharacterOutfitSync>();
+
         if (isLocalPlayer)
         {
             cif = new LocalKeyboardCIF(camController);
             camController.SetCameraTarget(transform);
             HumanoidRigInitialPose.SetupInstance(rigParts);
-            
-            GetComponent<CharacterOutfitSync>().LocalInit();
+
+            characterOutfit.LocalInit();
         }
         else
         {
@@ -56,6 +62,12 @@ public class CharacterController : NetworkBehaviour
         if (cif.AttemptsAttack())
         {
             animationController.SwitchTo(attackAnim);
+
+            if (isLocalPlayer)
+            {
+                Debug.Log("Cmd attack - clientside");
+                CmdAttack();
+            }
         }
 
         if (animationController.GetCurrentAnim() == attackAnim)
@@ -89,6 +101,20 @@ public class CharacterController : NetworkBehaviour
         if ( isLocalPlayer)
         {
             movementController.Step(Time.deltaTime);
+        }
+    }
+
+    [Command]
+    private void CmdAttack()
+    {
+        Debug.Log("Cmd attack - serverside");
+        if (characterOutfit.GetClassIndex() == (int)CharacterClass.Mage)
+        {
+            Vector3 spawnPosition = transform.position + transform.rotation * Vector3.forward * 2f;
+            GameObject fireball = Instantiate(fireballPrefab, spawnPosition, transform.rotation);
+            NetworkServer.Spawn(fireball);
+
+            fireball.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 5, 10), ForceMode.Impulse);
         }
     }
 }
