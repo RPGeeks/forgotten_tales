@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0967499, g: 0.3516391, b: 0.7158562, a: 1}
+  m_IndirectSpecularColor: {r: 0.0969557, g: 0.35191447, b: 0.71617156, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -55073,7 +55073,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6389104866525857878, guid: ef06e861a23d5ca4b9356623a76fcc2f, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6389104866525857878, guid: ef06e861a23d5ca4b9356623a76fcc2f, type: 3}
       propertyPath: m_LocalScale.x
@@ -67009,7 +67009,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   position:
-    targetPosOffset: {x: 0, y: 0, z: 0}
+    targetPosOffset: {x: 0, y: 1.5, z: 0}
     lookSmooth: 500
     distanceFromTarget: -4
     zoomSmooth: 800
