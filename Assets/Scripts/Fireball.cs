@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Fireball : NetworkBehaviour
 {
-    private const float lifetime = 5f;
+    private const float lifetime = 3f;
 
     void Start()
     {
