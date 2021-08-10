@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MovementController
 {
-    private float forwardSpeed = 4f;
+    private float forwardSpeed = 9f;
     private float distToGround = 2.6f;
 
     private Rigidbody rb;

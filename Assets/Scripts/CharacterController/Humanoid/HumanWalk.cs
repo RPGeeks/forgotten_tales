@@ -9,7 +9,7 @@ public class HumanWalk : ProceduralAnimation<HumanoidRigidRig>
 
     private float lastSwayAngle = 0f;
     private float t = 0;
-    private float shiftMultiplier = 1f;
+    private float shiftMultiplier = 1.8f;
 
     public HumanWalk(HumanoidRigidRig rig, CharacterInputFeed cif)
     {
