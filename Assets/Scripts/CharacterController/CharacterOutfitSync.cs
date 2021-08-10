@@ -7,9 +7,26 @@ public class CharacterOutfitSync : NetworkBehaviour
 {
     private HumanoidRigidRig rigParts;
 
-    public void Awake()
+    private void Awake()
     {
         rigParts = GetComponent<CharacterController>().rigParts;
+    }
+
+    private void Update()
+    {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+
+        if (isServer)
+        {
+            RpcChooseDefault();
+        }
+        else
+        {
+            CmdChooseDefault();
+        }
     }
 
     public void LocalInit()
@@ -94,15 +111,14 @@ public class CharacterOutfitSync : NetworkBehaviour
     [SyncVar(hook = nameof(SetClass))]
     int classIndex = 0;
 
-    void SetClass(int oldClass, int newClass)
+    private void SetClass(int oldClass, int newClass)
     {
         ChangeWeaponTo(newClass);
     }
 
-    public void ChangeWeaponTo(int weapon)
+    private void ChangeWeaponTo(int weapon)
     {
         Transform grip = rigParts.rightHand.Find("weapon-grip");
-
 
         for (int i = grip.childCount - 1; i >= 0; i--)
         {
@@ -126,6 +142,34 @@ public class CharacterOutfitSync : NetworkBehaviour
     public void CmdSetWeapon(int _classIndex)
     {
         this.classIndex = _classIndex;
+    }
+
+    public void SetSword()
+    {
+        Transform grip = rigParts.rightHand.Find("weapon-grip");
+
+        if (classIndex == 0)
+        {
+            grip.GetChild(classIndex).gameObject.SetActive(true);
+        }
+    }
+
+    [Command]
+    private void CmdChooseDefault()
+    {
+        SetSword();
+        RpcChooseDefault();
+    }
+
+    [ClientRpc]
+    private void RpcChooseDefault()
+    {
+        if (isLocalPlayer)
+        {
+            return;
+        }
+            
+        SetSword();
     }
 
     public int GetClassIndex()
