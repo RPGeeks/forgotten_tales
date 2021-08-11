@@ -20,6 +20,9 @@ public class CharacterController : NetworkBehaviour
 
     private CharacterOutfitSync characterOutfit;
 
+    private float cooldownTime = 0.6f;
+    private float nextAttack = 0;
+
     [SerializeField] private GameObject fireballPrefab;
 
     void Start()
@@ -59,14 +62,19 @@ public class CharacterController : NetworkBehaviour
 
     private void Update()
     {
-        if (cif.AttemptsAttack())
+        if (Time.time > nextAttack)
         {
-            animationController.SwitchTo(attackAnim);
-
-            if (isLocalPlayer)
+            if (cif.AttemptsAttack())
             {
-                Debug.Log("Cmd attack - clientside");
-                CmdAttack();
+                animationController.SwitchTo(attackAnim);
+
+                if (isLocalPlayer)
+                {
+                    Debug.Log("Cmd attack - clientside");
+                    CmdAttack();
+                }
+
+                nextAttack = Time.time + cooldownTime;
             }
         }
 
@@ -114,7 +122,7 @@ public class CharacterController : NetworkBehaviour
             GameObject fireball = Instantiate(fireballPrefab, spawnPosition, transform.rotation);
             NetworkServer.Spawn(fireball);
 
-            fireball.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 5, 10), ForceMode.Impulse);
+            fireball.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 5, 10), ForceMode.Impulse);  
         }
     }
 }
