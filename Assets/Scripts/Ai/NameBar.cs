@@ -1,16 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Mirror;
 
-public class HealthBar : NetworkBehaviour
+public class NameBar : NetworkBehaviour
 {
-    [SerializeField]
-    private Image foregroundImage;
     private Camera myCamera;
-
-    public float FillAmount { get { return foregroundImage.fillAmount; } set { foregroundImage.fillAmount = value; } }
 
     private void Start()
     {

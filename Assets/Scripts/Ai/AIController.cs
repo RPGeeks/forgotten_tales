@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Mirror;
+
 [RequireComponent(typeof(NavMeshAgent),typeof(SphereCollider))] 
-public class AIController : MonoBehaviour
+public class AIController : NetworkBehaviour
 {
     public NavMeshAgent agent;
 
@@ -25,7 +27,7 @@ public class AIController : MonoBehaviour
     [SerializeField] private Transform attackPoint;
     [SerializeField] private int attackValue = 5;
     //public float attackSphere = 0.5f;
-    [SerializeField] private float timeBetweenAttacks;
+    [SerializeField] private float timeBetweenAttacks=2f;
     [SerializeField] private bool alreadyAttacked;
 
     //States
@@ -36,9 +38,16 @@ public class AIController : MonoBehaviour
     [SerializeField] private bool playerInSightRange;
     [SerializeField] private bool playerInAttackRange;
 
-    //Weapon fire
-    [SerializeField] private float launchForce;
-    [SerializeField] private Rigidbody projectilePf;
+    [Header("Weapon fire")]
+    [SerializeField] private GameObject projectile;
+    [SerializeField] private Transform witchHandTransform;
+
+    //Health
+    [Header("Health")]
+    [SerializeField] GameObject hitPrefab;
+    [SerializeField] private int health = 100;
+    [SerializeField] private int currentHealth;
+
 
 
 
@@ -49,21 +58,24 @@ public class AIController : MonoBehaviour
         sightCollider = GetComponent<SphereCollider>();
         sightCollider.isTrigger = true;
         sightCollider.radius = sightRange;
+        witchHandTransform = GameObject.Find("Hand").transform;
+        currentHealth = health;
 
     }
 
     private void Update()
     {
-        //playerInSightRange = Physics.CheckSphere(transform.position, sightRange, Player);
-
-        //if (!playerInSightRange && !playerInAttackRange ) { Patroling(); }
-        //if (playerInSightRange && !playerInAttackRange ) { ChasePlayer();}
+        if(isServer == false)
+        {
+            return;
+        }
         if (target != null) 
         {
             float distanceToPlayer = Vector3.Distance(transform.position, target.position);
             if (distanceToPlayer < attackRange) 
             { 
-                AttackPlayer(); 
+                AttackPlayer();
+                
             }
             else
             {
@@ -76,7 +88,6 @@ public class AIController : MonoBehaviour
             Patroling(); 
         }
     }
-
 
     private void Patroling()
     {
@@ -100,6 +111,7 @@ public class AIController : MonoBehaviour
         }
     }
 
+    
     private void SearchWalkPoint()
     {
         //Calculate random point in range
@@ -114,21 +126,24 @@ public class AIController : MonoBehaviour
         }
     }
 
+    
     private void ChasePlayer()
     {
         if (Vector3.Distance(transform.position, target.position) > playerOutSightRange)
         {
             target = null;
+            //Debug.Log("Target Lost!");
             return;
         }
         agent.SetDestination(target.position);
     }
 
+    
     private void AttackPlayer()
     {
-       
         agent.SetDestination(transform.position);
-        transform.LookAt(target);
+        CmdLookAtPlayer();
+        //transform.LookAt(target);
         attackPoint = target;
         if (!alreadyAttacked)
         {
@@ -136,12 +151,28 @@ public class AIController : MonoBehaviour
             Collider[] hitPlayer = Physics.OverlapSphere(attackPoint.position, attackRange, Player);
             foreach (Collider Player in hitPlayer)
             {
-                //Debug.LogWarning("Scad Viata La Player");
-                //player.GetComponent<PlayerHealth>().TakeDamage(attackValue);
+                CmdShootFireball();
             }
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
+    }
+    void CmdShootFireball()
+    {
+        GameObject fireball = Instantiate(projectile,
+                new Vector3(witchHandTransform.position.x, witchHandTransform.position.y, witchHandTransform.position.z),
+                witchHandTransform.rotation) as GameObject;
+        fireball.transform.parent = null;
+        NetworkServer.Spawn(fireball);
+    }
+
+    
+    void CmdLookAtPlayer()
+    {
+        Vector3 targetPostition = new Vector3(target.position.x,
+                                            transform.position.y,
+                                            target.position.z);
+        transform.LookAt(targetPostition);
     }
     private void ResetAttack()
     {
@@ -153,10 +184,21 @@ public class AIController : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Player") && target == null)
         {
             target = other.gameObject.transform;
-            Debug.Log("Player encountered");
+            //Debug.Log("Player encountered");
         }    
     }
 
+
+    public void TakeDamage(Vector3 impactPoint, int playerNumber, int amount = 10)
+    {
+        currentHealth -= amount;
+        Instantiate(hitPrefab, impactPoint, transform.rotation);
+
+        if(currentHealth <= 0)
+        {
+            gameObject.SetActive(false);
+        }
+    }
 
     private void OnDrawGizmosSelected()
     {

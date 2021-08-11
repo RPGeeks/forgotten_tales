@@ -3,15 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Mirror;
 
-public class EnemyHealth : MonoBehaviour
+public class EnemyHealth : NetworkBehaviour
 {
     [SerializeField]
     private float maxHealth = 100;
 
     private float currentHealth;
 
-    public HealthBar healthBar;
+    [SerializeField]
+    private HealthBar healthBar;
 
     public float CurrentHealth { get { return currentHealth; } set { currentHealth = value; } }
 
@@ -23,11 +25,14 @@ public class EnemyHealth : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            CurrentHealth -= 10;
-            float currentHealthPercent = (float)currentHealth / (float)maxHealth;
-            healthBar.FillAmount = currentHealthPercent;
-        }
+
+    }
+
+    [Server]
+    public void CmdDamageTest()
+    {
+        CurrentHealth -= 10;
+        float currentHealthPercent = (float)currentHealth / (float)maxHealth;
+        healthBar.FillAmount = currentHealthPercent;
     }
 }
