@@ -24,6 +24,7 @@ public class CharacterController : NetworkBehaviour
     private float nextAttack = 0;
 
     [SerializeField] private GameObject fireballPrefab;
+    [SerializeField] private GameObject arrowPrefab;
 
     void Start()
     {
@@ -71,7 +72,22 @@ public class CharacterController : NetworkBehaviour
                 if (isLocalPlayer)
                 {
                     Debug.Log("Cmd attack - clientside");
-                    CmdAttack();
+
+                    if (characterOutfit.GetClassIndex() == (int)CharacterClass.Mage)
+                    {
+                        CmdMageAttack();
+                    }
+
+                    if (characterOutfit.GetClassIndex() == (int)CharacterClass.Archer)
+                    {
+                        Vector3 target;
+                        if (BowRaycast(out target))
+                        {
+                            CmdArcheryAttack(target);
+                        }
+                    }
+
+
                 }
 
                 nextAttack = Time.time + cooldownTime;
@@ -113,7 +129,7 @@ public class CharacterController : NetworkBehaviour
     }
 
     [Command]
-    private void CmdAttack()
+    private void CmdMageAttack()
     {
         Debug.Log("Cmd attack - serverside");
         if (characterOutfit.GetClassIndex() == (int)CharacterClass.Mage)
@@ -124,5 +140,56 @@ public class CharacterController : NetworkBehaviour
 
             fireball.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 5, 10), ForceMode.Impulse);  
         }
+
     }
+
+    [Command]
+    private void CmdArcheryAttack(Vector3 raycastedTarget)
+    {
+        if (characterOutfit.GetClassIndex() == (int)CharacterClass.Archer)
+        {
+            Vector3 spawnPosition = transform.position + transform.rotation * Vector3.forward * 1f;
+            GameObject arrow = Instantiate(arrowPrefab, spawnPosition, transform.rotation);
+            NetworkServer.Spawn(arrow);
+
+            arrow.GetComponent<ArrowController>().target = raycastedTarget;
+        }
+    }
+
+    // Raycasts a ray from the camera middle point in the scene and returns contact point
+    private bool BowRaycast(out Vector3 point)
+    {
+        Ray rayOrigin = Camera.main.ScreenPointToRay(
+            new Vector3(Camera.main.scaledPixelWidth/2, Camera.main.scaledPixelHeight/2, 0));
+
+        RaycastHit rayinfo;
+
+        var results = Physics.RaycastAll(rayOrigin, 100f);
+
+        foreach (var i in results)
+        {
+            if (i.collider != null && i.collider.gameObject != gameObject)
+            {
+                //Vector3 direction = rayinfo.point - Camera.main.transform.position;
+
+                point = i.point;
+                return true;
+            }
+        }
+
+        point = Vector3.zero;
+        return false;
+    }
+
+    /*
+    private void OnDrawGizmos()
+    {
+        Vector3 point;
+        if ( BowRaycast(out point) )
+        {
+            Gizmos.DrawSphere(point, 1);
+        }
+        
+    }
+    */
 }
