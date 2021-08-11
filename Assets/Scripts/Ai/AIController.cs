@@ -45,8 +45,7 @@ public class AIController : NetworkBehaviour
     //Health
     [Header("Health")]
     [SerializeField] GameObject hitPrefab;
-    [SerializeField] private int health = 100;
-    [SerializeField] private int currentHealth;
+    [SerializeField] EnemyHealth _health;
 
 
 
@@ -59,7 +58,7 @@ public class AIController : NetworkBehaviour
         sightCollider.isTrigger = true;
         sightCollider.radius = sightRange;
         witchHandTransform = GameObject.Find("Hand").transform;
-        currentHealth = health;
+        _health = GetComponent<EnemyHealth>();
 
     }
 
@@ -87,6 +86,7 @@ public class AIController : NetworkBehaviour
         { 
             Patroling(); 
         }
+        if (Input.GetKeyDown(KeyCode.E)) { RpcTakeDamage(10f); }
     }
 
     private void Patroling()
@@ -188,13 +188,13 @@ public class AIController : NetworkBehaviour
         }    
     }
 
-
-    public void TakeDamage(Vector3 impactPoint, int playerNumber, int amount = 10)
+    [ClientRpc]
+    public void RpcTakeDamage(float amount)
     {
-        currentHealth -= amount;
-        Instantiate(hitPrefab, impactPoint, transform.rotation);
+        _health.CurrentHealth -= amount;
+        //Instantiate(hitPrefab, impactPoint, transform.rotation);
 
-        if(currentHealth <= 0)
+        if (_health.CurrentHealth <= 0)
         {
             gameObject.SetActive(false);
         }

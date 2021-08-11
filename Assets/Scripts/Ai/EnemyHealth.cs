@@ -8,12 +8,14 @@ using Mirror;
 public class EnemyHealth : NetworkBehaviour
 {
     [SerializeField]
-    private float maxHealth = 100;
+    public float maxHealth = 100;
 
-    private float currentHealth;
+    [SyncVar]
+    [SerializeField]
+    public float currentHealth;
 
     [SerializeField]
-    private HealthBar healthBar;
+    public HealthBar healthBar;
 
     public float CurrentHealth { get { return currentHealth; } set { currentHealth = value; } }
 
@@ -25,14 +27,22 @@ public class EnemyHealth : NetworkBehaviour
 
     void Update()
     {
-
+        if (isServer == false)
+        {
+            return;
+        }
+        RpcDamageTest();
+/*        float currentHealthPercent = (float)currentHealth / (float)maxHealth;
+        healthBar.FillAmount = currentHealthPercent;*/
     }
 
-    [Server]
-    public void CmdDamageTest()
+    [ClientRpc]
+    public void RpcDamageTest()
     {
-        CurrentHealth -= 10;
+        //CurrentHealth -= 10;
         float currentHealthPercent = (float)currentHealth / (float)maxHealth;
         healthBar.FillAmount = currentHealthPercent;
     }
+
+
 }

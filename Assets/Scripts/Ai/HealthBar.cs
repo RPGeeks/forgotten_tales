@@ -19,6 +19,10 @@ public class HealthBar : NetworkBehaviour
 
     private void LateUpdate()
     {
+        if (isServer == false)
+        {
+            return;
+        }
         transform.LookAt(myCamera.transform);
         transform.Rotate(0, 180, 0);
     }
