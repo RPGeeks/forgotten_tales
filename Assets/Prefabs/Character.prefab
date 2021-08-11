@@ -167,6 +167,7 @@ MonoBehaviour:
     leftShoulder: {fileID: 737596146878127204}
     rightShoulder: {fileID: 1337587338611568220}
   fireballPrefab: {fileID: 2162792461418347102, guid: f2a7a23f1607069409fdabb6369de9be, type: 3}
+  arrowPrefab: {fileID: 8559951426427756600, guid: 125203bf5e9759248b4096918d9de2af, type: 3}
 --- !u!114 &8681396540556774358
 MonoBehaviour:
   m_ObjectHideFlags: 0
