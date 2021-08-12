@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CharacterController characterController;
 
     private static GameManager _instance;
-    public static GameManager Instange { get => _instance; }
+    public static GameManager Instance { get => _instance; }
 
     public static bool IsInventoryOpened { get; private set; }
 
@@ -47,19 +47,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void OnEnable()
-    {
-        // TODO MenuInputManager will be removed
-        MenuInputManager.onInventoryEvent += HandleInventory;
-    }
-
-    private void OnDisable()
-    {
-        // TODO MenuInputManager will be removed
-        MenuInputManager.onInventoryEvent -= HandleInventory;
-    }
-
-    private void HandleInventory()
+    public void ToggleInventory()
     {
         bool isInventoryActive = inventoryController.gameObject.activeSelf;
         IsInventoryOpened = !isInventoryActive;
