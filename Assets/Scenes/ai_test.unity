@@ -528,7 +528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1343750544286564978, guid: 09d6410634581744d90efa16773608aa, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11.78
+      value: 15.34
       objectReference: {fileID: 0}
     - target: {fileID: 1343750544286564978, guid: 09d6410634581744d90efa16773608aa, type: 3}
       propertyPath: m_LocalRotation.w
@@ -566,6 +566,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Witch
       objectReference: {fileID: 0}
+    - target: {fileID: 1343750544286564991, guid: 09d6410634581744d90efa16773608aa, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1343750544598853215, guid: 09d6410634581744d90efa16773608aa, type: 3}
       propertyPath: sceneId
       value: 720216280
@@ -573,6 +577,10 @@ PrefabInstance:
     - target: {fileID: 1343750544773558478, guid: 09d6410634581744d90efa16773608aa, type: 3}
       propertyPath: sceneId
       value: 3564963022
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343750544773558485, guid: 09d6410634581744d90efa16773608aa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09d6410634581744d90efa16773608aa, type: 3}
