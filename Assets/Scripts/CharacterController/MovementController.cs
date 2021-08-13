@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MovementController
 {
-    private float forwardSpeed = 4f;
+    private float forwardSpeed = 9f;
+    private float distToGround = 2.6f;
 
     private Rigidbody rb;
     private CharacterInputFeed cif;
@@ -16,7 +17,7 @@ public class MovementController
         this.rb = rb;
         this.cif = cif;
 
-        rb.SetMaxAngularVelocity(0);
+        rb.maxAngularVelocity = 0;
     }
 
     public void Step(float delta)
@@ -34,7 +35,11 @@ public class MovementController
 
         if (cif.StartJump())
         {
-            rb.AddForce(Vector3.up * 5f, ForceMode.Impulse);
+            if (Physics.Raycast(rb.transform.position, Vector3.down, distToGround))
+            {
+                rb.AddForce(Vector3.up * 5f, ForceMode.Impulse);
+            } 
+            
             // animationController.SwitchTo(ProcAnims.Jump);
         }
 

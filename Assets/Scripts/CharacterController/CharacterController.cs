@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class CharacterController : NetworkBehaviour
 {
-    [SerializeField] private HumanoidRigidRig rigParts;
+    public HumanoidRigidRig rigParts;
 
     private Rigidbody rb;
 
-    private CharacterInputFeed cif;
+    public CharacterInputFeed cif;
 
     private ProceduralAnimationController<HumanoidRigidRig> animationController;
     private MovementController movementController;
@@ -18,7 +18,13 @@ public class CharacterController : NetworkBehaviour
     private ProceduralAnimation<HumanoidRigidRig> idleAnim;
     private ProceduralAnimation<HumanoidRigidRig> attackAnim;
 
-    
+    private CharacterOutfitSync characterOutfit;
+
+    private float cooldownTime = 0.6f;
+    private float nextAttack = 0;
+
+    [SerializeField] private GameObject fireballPrefab;
+    [SerializeField] private GameObject arrowPrefab;
 
     void Start()
     {
@@ -28,12 +34,19 @@ public class CharacterController : NetworkBehaviour
 
         rb = GetComponent<Rigidbody>();
 
+        characterOutfit = GetComponent<CharacterOutfitSync>();
+
         if (isLocalPlayer)
         {
             cif = new LocalKeyboardCIF(camController);
-        } else
+            camController.SetCameraTarget(transform);
+            HumanoidRigInitialPose.SetupInstance(rigParts);
+
+            characterOutfit.LocalInit();
+        }
+        else
         {
-            cif = new EmptyCIF();
+            cif = GetComponent<CIFSync>();// new NetworkedCIF();
         }
 
         animationController = new ProceduralAnimationController<HumanoidRigidRig>(cif, rigParts);
@@ -46,15 +59,39 @@ public class CharacterController : NetworkBehaviour
         //animationController.SwitchTo(attackAnim);
 
         movementController = new MovementController(rb, cif);
-
-        camController.SetCameraTarget(transform);
     }
 
     private void Update()
     {
-        if (cif.AttemptsAttack())
+        if (Time.time > nextAttack)
         {
-            animationController.SwitchTo(attackAnim);
+            if (cif.AttemptsAttack())
+            {
+                animationController.SwitchTo(attackAnim);
+
+                if (isLocalPlayer)
+                {
+                    Debug.Log("Cmd attack - clientside");
+
+                    if (characterOutfit.GetClassIndex() == (int)CharacterClass.Mage)
+                    {
+                        CmdMageAttack();
+                    }
+
+                    if (characterOutfit.GetClassIndex() == (int)CharacterClass.Archer)
+                    {
+                        Vector3 target;
+                        if (BowRaycast(out target))
+                        {
+                            CmdArcheryAttack(target);
+                        }
+                    }
+
+
+                }
+
+                nextAttack = Time.time + cooldownTime;
+            }
         }
 
         if (animationController.GetCurrentAnim() == attackAnim)
@@ -84,6 +121,75 @@ public class CharacterController : NetworkBehaviour
         
 
         animationController.Step(Time.deltaTime);
-        movementController.Step(Time.deltaTime);
+
+        if ( isLocalPlayer)
+        {
+            movementController.Step(Time.deltaTime);
+        }
     }
+
+    [Command]
+    private void CmdMageAttack()
+    {
+        Debug.Log("Cmd attack - serverside");
+        if (characterOutfit.GetClassIndex() == (int)CharacterClass.Mage)
+        {
+            Vector3 spawnPosition = transform.position + transform.rotation * Vector3.forward * 2f;
+            GameObject fireball = Instantiate(fireballPrefab, spawnPosition, transform.rotation);
+            NetworkServer.Spawn(fireball);
+
+            fireball.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 5, 10), ForceMode.Impulse);  
+        }
+
+    }
+
+    [Command]
+    private void CmdArcheryAttack(Vector3 raycastedTarget)
+    {
+        if (characterOutfit.GetClassIndex() == (int)CharacterClass.Archer)
+        {
+            Vector3 spawnPosition = transform.position + transform.rotation * Vector3.forward * 1f;
+            GameObject arrow = Instantiate(arrowPrefab, spawnPosition, transform.rotation);
+            NetworkServer.Spawn(arrow);
+
+            arrow.GetComponent<ArrowController>().target = raycastedTarget;
+        }
+    }
+
+    // Raycasts a ray from the camera middle point in the scene and returns contact point
+    private bool BowRaycast(out Vector3 point)
+    {
+        Ray rayOrigin = Camera.main.ScreenPointToRay(
+            new Vector3(Camera.main.scaledPixelWidth/2, Camera.main.scaledPixelHeight/2, 0));
+
+        RaycastHit rayinfo;
+
+        var results = Physics.RaycastAll(rayOrigin, 100f);
+
+        foreach (var i in results)
+        {
+            if (i.collider != null && i.collider.gameObject != gameObject)
+            {
+                //Vector3 direction = rayinfo.point - Camera.main.transform.position;
+
+                point = i.point;
+                return true;
+            }
+        }
+
+        point = Vector3.zero;
+        return false;
+    }
+
+    /*
+    private void OnDrawGizmos()
+    {
+        Vector3 point;
+        if ( BowRaycast(out point) )
+        {
+            Gizmos.DrawSphere(point, 1);
+        }
+        
+    }
+    */
 }
