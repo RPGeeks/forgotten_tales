@@ -19,4 +19,9 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void VisitWebsite()
+    {
+        Application.OpenURL("https://opreaolivia73.wixsite.com/rpgeeks3/meet-the-team");
+    }
 }
