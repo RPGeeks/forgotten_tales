@@ -8,6 +8,8 @@ TagManager:
   - GenderSelector
   - RaceSelector
   - ClassSelector
+  - DialogueCanvas
+  - Pet
   layers:
   - Default
   - TransparentFX
@@ -18,7 +20,7 @@ TagManager:
   - 1
   - Not Seen
   - 2
-  - 
+  - Player
   - 
   - 
   - 
