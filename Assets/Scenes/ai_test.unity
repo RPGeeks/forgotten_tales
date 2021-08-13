@@ -566,6 +566,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Witch
       objectReference: {fileID: 0}
+    - target: {fileID: 1343750544286564990, guid: 09d6410634581744d90efa16773608aa, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343750544286564990, guid: 09d6410634581744d90efa16773608aa, type: 3}
+      propertyPath: Player.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
     - target: {fileID: 1343750544286564991, guid: 09d6410634581744d90efa16773608aa, type: 3}
       propertyPath: m_IsKinematic
       value: 0
