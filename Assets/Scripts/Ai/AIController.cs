@@ -11,7 +11,7 @@ public class AIController : NetworkBehaviour
 
     public Transform target;
 
-    public LayerMask Player;
+    public LayerMask playerLayerMask;
 
     private SphereCollider sightCollider;
 
@@ -59,7 +59,7 @@ public class AIController : NetworkBehaviour
         sightCollider.radius = sightRange;
         witchHandTransform = GameObject.Find("Hand").transform;
         _health = GetComponent<EnemyHealth>();
-
+        playerLayerMask = LayerMask.GetMask("Player");
     }
 
     private void Update()
@@ -86,7 +86,7 @@ public class AIController : NetworkBehaviour
         { 
             Patroling(); 
         }
-        if (Input.GetKeyDown(KeyCode.E)) { RpcTakeDamage(10f); }
+        if (Input.GetKeyDown(KeyCode.F)) { RpcTakeDamage(10f); }
     }
 
     private void Patroling()
@@ -142,32 +142,43 @@ public class AIController : NetworkBehaviour
     private void AttackPlayer()
     {
         agent.SetDestination(transform.position);
-        CmdLookAtPlayer();
-        //transform.LookAt(target);
+        LookAtPlayer();
         attackPoint = target;
         if (!alreadyAttacked)
         {
-            
-            Collider[] hitPlayer = Physics.OverlapSphere(attackPoint.position, attackRange, Player);
-            foreach (Collider Player in hitPlayer)
+            Collider[] playerColliders = Physics.OverlapSphere(witchHandTransform.position, sightRange, playerLayerMask);
+
+            GameObject fireball = Instantiate(projectile,
+            new Vector3(witchHandTransform.position.x, witchHandTransform.position.y, witchHandTransform.position.z),
+            witchHandTransform.rotation) as GameObject;
+            fireball.transform.parent = null;
+
+            foreach (Collider playerCollider in playerColliders)
             {
-                CmdShootFireball();
+                if (playerCollider.GetType() == typeof(SphereCollider))
+                {
+                    Physics.IgnoreCollision(playerCollider, fireball.GetComponent<SphereCollider>());
+                }
             }
+            NetworkServer.Spawn(fireball);
+
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }
-    void CmdShootFireball()
+
+    void ShootFireball()
     {
         GameObject fireball = Instantiate(projectile,
                 new Vector3(witchHandTransform.position.x, witchHandTransform.position.y, witchHandTransform.position.z),
                 witchHandTransform.rotation) as GameObject;
         fireball.transform.parent = null;
+        Physics.IgnoreCollision(target.GetComponent<SphereCollider>(), fireball.GetComponent<SphereCollider>());
         NetworkServer.Spawn(fireball);
     }
 
     
-    void CmdLookAtPlayer()
+    void LookAtPlayer()
     {
         Vector3 targetPostition = new Vector3(target.position.x,
                                             transform.position.y,
