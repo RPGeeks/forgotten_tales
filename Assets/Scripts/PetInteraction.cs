@@ -7,11 +7,12 @@ public class PetInteraction : NetworkBehaviour
 {
     [SerializeField] private GameObject dogPrefab;
     [SerializeField] private GameObject catPrefab;
+    private bool isPetSpawned;
     private GameObject triggeringNpc;
     private bool triggering;
 
 
-    // Update is called once per frame
+    // Update is called once per frameuni
     void Update()
     {
 
@@ -24,13 +25,15 @@ public class PetInteraction : NetworkBehaviour
                     CmdSit();
                 }
             }
-            if (Input.GetKeyDown(KeyCode.F1))
+            if (Input.GetKeyDown(KeyCode.F1) && !isPetSpawned)
             {
-                CreateDoggy();
+                CreateDog();
+                isPetSpawned = true;
             }
-            else if (Input.GetKeyDown(KeyCode.F2))
+            else if (Input.GetKeyDown(KeyCode.F2) && !isPetSpawned)
             {
                 CreateCat();
+                isPetSpawned = true;
             }
         }
 
@@ -78,18 +81,18 @@ public class PetInteraction : NetworkBehaviour
     }
 
     [Command]
-    private void CreateDoggy()
+    private void CreateDog()
     {
-        GameObject doggy = Instantiate(dogPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-        doggy.GetComponent<FollowTarget>().SetTarget(transform);
-        NetworkServer.Spawn(doggy);
+        GameObject dog = Instantiate(dogPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+        dog.GetComponent<FollowTarget>().SetTarget(gameObject);
+        NetworkServer.Spawn(dog);
     }
 
     [Command]
     private void CreateCat()
     {
         GameObject cat = Instantiate(catPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-        cat.GetComponent<FollowTarget>().SetTarget(transform);
+        cat.GetComponent<FollowTarget>().SetTarget(gameObject);
         NetworkServer.Spawn(cat);
     }
 }
