@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class ButtonSounds : MonoBehaviour
+public class ButtonSoundsScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	public AudioSource clickSoundFX;
+	public AudioClip hoverSound;
+	public AudioClip clickSound;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public void HoverSound()
+	{
+		clickSoundFX.PlayOneShot(hoverSound);
+	}
+
+	public void ClickSound()
+	{
+		clickSoundFX.PlayOneShot(clickSound);
+	}
 }
