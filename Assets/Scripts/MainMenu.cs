@@ -10,6 +10,10 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("CharacterSelection");
     }
 
+    public void Settings()
+    {
+        SceneManager.LoadScene("MenuSettings");
+    }
     public void Credits()
     {
         SceneManager.LoadScene("Credits");
