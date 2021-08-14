@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -228,7 +228,7 @@ RectTransform:
   m_GameObject: {fileID: 259126804}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2124, y: 1.2124, z: 1.2124}
   m_Children:
   - {fileID: 1315224068}
   - {fileID: 1784176008}
@@ -239,7 +239,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 104}
+  m_AnchoredPosition: {x: 0, y: 21}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &259126806
@@ -920,6 +920,8 @@ GameObject:
   - component: {fileID: 1315224071}
   - component: {fileID: 1315224070}
   - component: {fileID: 1315224069}
+  - component: {fileID: 1315224072}
+  - component: {fileID: 1315224073}
   m_Layer: 5
   m_Name: HostButton
   m_TagString: Untagged
@@ -944,7 +946,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11.155, y: 57.5}
+  m_AnchoredPosition: {x: 11.155, y: 49.4}
   m_SizeDelta: {x: 264.93, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1315224069
@@ -1041,6 +1043,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1315224067}
   m_CullTransparentMesh: 1
+--- !u!114 &1315224072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315224067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2583d4890e3724a478eebaf20264c37d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickSoundFX: {fileID: 1284089534}
+  hoverSound: {fileID: 8300000, guid: bc1a6db65cac4784592552546fe444c7, type: 3}
+  clickSound: {fileID: 8300000, guid: bc1a6db65cac4784592552546fe444c7, type: 3}
+--- !u!114 &1315224073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315224067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1315224072}
+          m_TargetAssemblyTypeName: ButtonSoundsScript, Assembly-CSharp
+          m_MethodName: HoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1315224072}
+          m_TargetAssemblyTypeName: ButtonSoundsScript, Assembly-CSharp
+          m_MethodName: HoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!850595691 &1484960852
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -1139,7 +1201,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 71.80993, y: 8.499994}
+  m_AnchoredPosition: {x: 71.80993, y: 3}
   m_SizeDelta: {x: 143.6198, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1672981692
@@ -1344,6 +1406,8 @@ GameObject:
   - component: {fileID: 1784176011}
   - component: {fileID: 1784176010}
   - component: {fileID: 1784176009}
+  - component: {fileID: 1784176012}
+  - component: {fileID: 1784176013}
   m_Layer: 5
   m_Name: ClientButton
   m_TagString: Untagged
@@ -1368,7 +1432,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -71.31, y: 8.5}
+  m_AnchoredPosition: {x: -71.31, y: 2}
   m_SizeDelta: {x: 121.31, y: 45}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1784176009
@@ -1465,6 +1529,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1784176007}
   m_CullTransparentMesh: 1
+--- !u!114 &1784176012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784176007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2583d4890e3724a478eebaf20264c37d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickSoundFX: {fileID: 1284089534}
+  hoverSound: {fileID: 8300000, guid: bc1a6db65cac4784592552546fe444c7, type: 3}
+  clickSound: {fileID: 8300000, guid: bc1a6db65cac4784592552546fe444c7, type: 3}
+--- !u!114 &1784176013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784176007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1784176012}
+          m_TargetAssemblyTypeName: ButtonSoundsScript, Assembly-CSharp
+          m_MethodName: HoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1784176012}
+          m_TargetAssemblyTypeName: ButtonSoundsScript, Assembly-CSharp
+          m_MethodName: HoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1856817302
 GameObject:
   m_ObjectHideFlags: 0
@@ -1477,6 +1601,8 @@ GameObject:
   - component: {fileID: 1856817306}
   - component: {fileID: 1856817305}
   - component: {fileID: 1856817304}
+  - component: {fileID: 1856817307}
+  - component: {fileID: 1856817308}
   m_Layer: 5
   m_Name: ServerOnlyButton
   m_TagString: Untagged
@@ -1501,7 +1627,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11.155, y: -40.3}
+  m_AnchoredPosition: {x: 11.155, y: -45.2}
   m_SizeDelta: {x: 264.93, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1856817304
@@ -1598,6 +1724,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1856817302}
   m_CullTransparentMesh: 1
+--- !u!114 &1856817307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856817302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2583d4890e3724a478eebaf20264c37d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickSoundFX: {fileID: 1284089534}
+  hoverSound: {fileID: 8300000, guid: bc1a6db65cac4784592552546fe444c7, type: 3}
+  clickSound: {fileID: 8300000, guid: bc1a6db65cac4784592552546fe444c7, type: 3}
+--- !u!114 &1856817308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856817302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1856817307}
+          m_TargetAssemblyTypeName: ButtonSoundsScript, Assembly-CSharp
+          m_MethodName: HoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1856817307}
+          m_TargetAssemblyTypeName: ButtonSoundsScript, Assembly-CSharp
+          m_MethodName: HoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1899759687
 GameObject:
   m_ObjectHideFlags: 0
