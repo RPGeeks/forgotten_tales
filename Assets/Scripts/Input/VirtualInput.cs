@@ -48,5 +48,13 @@ public class VirtualInput : MonoBehaviour
             ChatManager.instance.inputField.Select();
             //ChatManager.instance.UnFade();
         }
+
+        if (!IsChatOpened)
+        {
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                GameManager.Instance.ToggleInventory();
+            }
+        }
     }
 }

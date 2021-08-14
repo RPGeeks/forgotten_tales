@@ -128,5 +128,10 @@ public class CharacterOutfitSync : NetworkBehaviour
         this.classIndex = _classIndex;
     }
 
+    public int GetClassIndex()
+    {
+        return classIndex;
+    }
+
     #endregion WEAPON_CONFIGURATION
 }

@@ -7,11 +7,21 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("CharacterSelection");
+    }
+
+    public void Credits()
+    {
+        SceneManager.LoadScene("Credits");
     }
 
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void VisitWebsite()
+    {
+        Application.OpenURL("https://opreaolivia73.wixsite.com/rpgeeks3/meet-the-team");
     }
 }

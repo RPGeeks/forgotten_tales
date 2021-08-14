@@ -96,6 +96,11 @@ public class ImprovedCharSelection : MonoBehaviour
         previewCharacter.ChangeHeadTo(chosenGender, chosenRace);
     }
 
+    public void Back()
+    {
+        SceneManager.LoadScene("Menu");
+    }
+
     public void StartGame()
     {
         PlayerPrefs.SetInt("ClassSelected", (int)chosenClass);
