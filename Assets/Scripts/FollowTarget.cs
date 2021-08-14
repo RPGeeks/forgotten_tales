@@ -6,9 +6,9 @@ using Mirror;
 
 public class FollowTarget : NetworkBehaviour
 {
-    [SerializeField] private Transform target;
+    [SerializeField] private GameObject target;
     private float targetDistance;
-    private float allowedDistance = 4f;
+    private float allowedDistance = 5.5f;
     private NavMeshAgent nav;
     private Animator anim;
     private bool isSitting;
@@ -33,12 +33,12 @@ public class FollowTarget : NetworkBehaviour
     {
         if (isServer && !isSitting)
         {
-            targetDistance = Vector3.Distance(transform.position, target.position);
+            targetDistance = Vector3.Distance(transform.position, target.transform.position);
 
             if (targetDistance >= allowedDistance)
             {
                 nav.isStopped = false;
-                nav.SetDestination(target.position);
+                nav.SetDestination(target.transform.position);
                 anim.SetInteger("Walk", 1);
             }
             else
@@ -50,10 +50,11 @@ public class FollowTarget : NetworkBehaviour
 
     }
 
+
     // Set target to be followed
-    public void SetTarget(Transform tTarget)
+    public void SetTarget(GameObject objectTarget)
     {
-        target = tTarget;
+        target = objectTarget;
     }
 
     // Pet will stop following target and will sit
@@ -74,5 +75,10 @@ public class FollowTarget : NetworkBehaviour
     public Animator getAnimator()
     {
         return anim;
+    }
+
+    public GameObject getTarget()
+    {
+        return target;
     }
 }
