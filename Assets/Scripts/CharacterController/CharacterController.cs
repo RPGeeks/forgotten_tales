@@ -209,7 +209,10 @@ public class CharacterController : NetworkBehaviour
 
     void SetHealth(float oldHealth, float newHealth)
     {
-        healthSlider.value = newHealth;
+        if (isLocalPlayer)
+        {
+            healthSlider.value = newHealth;
+        }
     }
 
     /*
@@ -225,6 +228,7 @@ public class CharacterController : NetworkBehaviour
     }
     */
 
+    [Server]
     public void DealDamage(float damage)
     {
         health -= damage;
