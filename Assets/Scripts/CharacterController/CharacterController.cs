@@ -2,6 +2,7 @@ using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterController : NetworkBehaviour
 {
@@ -59,6 +60,14 @@ public class CharacterController : NetworkBehaviour
         //animationController.SwitchTo(attackAnim);
 
         movementController = new MovementController(rb, cif);
+
+        healthSlider = GameObject.Find("Canvas").transform
+            .Find("Health Bar").gameObject.GetComponent<Slider>();
+
+        if (isServer)
+        {
+            InvokeRepeating(nameof(HealingTick), rehealPeriod, rehealPeriod);
+        }
     }
 
     private void Update()
@@ -192,4 +201,48 @@ public class CharacterController : NetworkBehaviour
         
     }
     */
+
+    [SerializeField] private Slider healthSlider;
+
+    [SyncVar(hook = nameof(SetHealth))]
+    private float health = 50f;
+
+    void SetHealth(float oldHealth, float newHealth)
+    {
+        healthSlider.value = newHealth;
+    }
+
+    /*
+    [ServerCallback]
+    private void OnCollisionEnter(Collision collision)
+    {
+        // if it's a fireball,
+        var contact = collision.rigidbody.gameObject.GetComponent<Projectile>();
+        if (contact != null)
+        {
+            DealDamage(10f);
+        }
+    }
+    */
+
+    public void DealDamage(float damage)
+    {
+        health -= damage;
+        if (health < 0f)
+        {
+            health = 0f;
+        }
+    }
+
+    const float rehealRate = 1f;
+    const float rehealPeriod = 1f;
+
+    private void HealingTick()
+    {
+        health += rehealRate;
+        if (health > healthSlider.maxValue)
+        {
+            health = healthSlider.maxValue;
+        }
+    }
 }
