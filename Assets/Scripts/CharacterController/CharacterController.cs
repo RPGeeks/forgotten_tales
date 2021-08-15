@@ -27,6 +27,8 @@ public class CharacterController : NetworkBehaviour
     [SerializeField] private GameObject fireballPrefab;
     [SerializeField] private GameObject arrowPrefab;
 
+    private PlayerHealthBar hpbar;
+
     void Start()
     {
         CameraController camController;
@@ -37,6 +39,8 @@ public class CharacterController : NetworkBehaviour
 
         characterOutfit = GetComponent<CharacterOutfitSync>();
 
+        hpbar = transform.Find("HealthBar").gameObject.GetComponent<PlayerHealthBar>();
+
         if (isLocalPlayer)
         {
             cif = new LocalKeyboardCIF(camController);
@@ -44,6 +48,8 @@ public class CharacterController : NetworkBehaviour
             HumanoidRigInitialPose.SetupInstance(rigParts);
 
             characterOutfit.LocalInit();
+
+            hpbar.gameObject.SetActive(false);
         }
         else
         {
@@ -212,6 +218,9 @@ public class CharacterController : NetworkBehaviour
         if (isLocalPlayer)
         {
             healthSlider.value = newHealth;
+        } else
+        {
+            hpbar.FillAmount = health / healthSlider.maxValue;
         }
     }
 
