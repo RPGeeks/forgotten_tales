@@ -57,7 +57,7 @@ public class AIController : NetworkBehaviour
         sightCollider = GetComponent<SphereCollider>();
         sightCollider.isTrigger = true;
         sightCollider.radius = sightRange;
-        witchHandTransform = GameObject.Find("Hand").transform;
+        witchHandTransform = transform.Find("Hand");
         _health = GetComponent<EnemyHealth>();
         playerLayerMask = LayerMask.GetMask("Player");
     }
@@ -141,6 +141,8 @@ public class AIController : NetworkBehaviour
     
     private void AttackPlayer()
     {
+        Debug.Log("AttackPlayer");
+
         agent.SetDestination(transform.position);
         LookAtPlayer();
         attackPoint = target;
@@ -160,6 +162,8 @@ public class AIController : NetworkBehaviour
                     Physics.IgnoreCollision(playerCollider, fireball.GetComponent<SphereCollider>());
                 }
             }
+            Debug.Log("Spwaned Network fireball");
+
             NetworkServer.Spawn(fireball);
 
             alreadyAttacked = true;
@@ -167,15 +171,16 @@ public class AIController : NetworkBehaviour
         }
     }
 
-    void ShootFireball()
+/*    void ShootFireball()
     {
+        Debug.Log("Shoot fireball");
         GameObject fireball = Instantiate(projectile,
                 new Vector3(witchHandTransform.position.x, witchHandTransform.position.y, witchHandTransform.position.z),
                 witchHandTransform.rotation) as GameObject;
         fireball.transform.parent = null;
         Physics.IgnoreCollision(target.GetComponent<SphereCollider>(), fireball.GetComponent<SphereCollider>());
         NetworkServer.Spawn(fireball);
-    }
+    }*/
 
     
     void LookAtPlayer()

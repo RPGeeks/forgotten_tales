@@ -347,9 +347,9 @@ MonoBehaviour:
   syncInterval: 0.1
   agent: {fileID: 1343750544286564989}
   target: {fileID: 8722320682068687327, guid: 215e7031be151c94eb6bbc45f32c28fb, type: 3}
-  Player:
+  playerLayerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 512
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointSet: 0
   walkPointRange: 5
