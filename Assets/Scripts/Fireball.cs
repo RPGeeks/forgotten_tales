@@ -19,4 +19,17 @@ public class Fireball : NetworkBehaviour
     {
         NetworkServer.Destroy(gameObject);
     }
+
+    [ServerCallback]
+    void OnTriggerEnter(Collider co)
+    {
+        AIController mobAI = co.gameObject.GetComponent<AIController>();
+
+        if (mobAI == null)
+        {
+            return;
+        }
+        
+        mobAI.RpcTakeDamage(10f);
+    }
 }
