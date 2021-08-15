@@ -86,7 +86,7 @@ public class AIController : NetworkBehaviour
         { 
             Patroling(); 
         }
-        if (Input.GetKeyDown(KeyCode.F)) { RpcTakeDamage(10f); }
+        //if (Input.GetKeyDown(KeyCode.F)) { RpcTakeDamage(10f); }
     }
 
     private void Patroling()
