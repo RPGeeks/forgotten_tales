@@ -39,4 +39,24 @@ public class ArrowController : NetworkBehaviour
     {
         NetworkServer.Destroy(this.gameObject);
     }
+
+    [ServerCallback]
+    void OnTriggerEnter(Collider co)
+    {
+        AIController mobAI = co.gameObject.GetComponent<AIController>();
+
+        if (mobAI == null)
+        {
+            return;
+        }
+
+        if (IsInvoking(nameof(AutoDestroy)))
+        {
+            CancelInvoke(nameof(AutoDestroy));
+        }
+
+        mobAI.RpcTakeDamage(10f);
+
+        AutoDestroy();
+    }
 }
