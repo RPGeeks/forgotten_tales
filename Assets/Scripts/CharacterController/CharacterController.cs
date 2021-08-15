@@ -241,6 +241,7 @@ public class CharacterController : NetworkBehaviour
     const float rehealRate = 1f;
     const float rehealPeriod = 1f;
 
+    [Server]
     private void HealingTick()
     {
         health += rehealRate;
