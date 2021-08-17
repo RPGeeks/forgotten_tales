@@ -22,24 +22,22 @@ public class ChangeColorScript : MonoBehaviour
         children = new GameObject[10];
         texts = new TextMeshProUGUI[10];
 
-        allButtonsInThisCategory = GameObject.FindGameObjectsWithTag(gameObject.transform.GetChild(0).gameObject.tag);
-        foreach(GameObject gameObject in allButtonsInThisCategory)
+        //allButtonsInThisCategory = GameObject.FindGameObjectsWithTag(gameObject.transform.GetChild(0).gameObject.tag);
+        foreach (GameObject gameObject in allButtonsInThisCategory)
         {
             children[index] = gameObject.transform.GetChild(0).gameObject;
             texts[index] = children[index].GetComponent<TextMeshProUGUI>();
             index++;
-            
+
         }
     }
 
     public void ChangeColor(int selectedIndex)
     {
-        selectedColor = new Color(1, 0 , 0, 1);
+        selectedColor = new Color(1, 0, 0, 1);
         Color white = new Color(1, 1, 1, 1);
         texts[currentIndex].color = white;
         texts[selectedIndex].color = selectedColor;
         currentIndex = selectedIndex;
-    } 
-
-
+    }
 }
