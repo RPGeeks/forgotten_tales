@@ -1,3 +1,11 @@
+## Preview ##
+
+![unknown](https://user-images.githubusercontent.com/67336649/129879054-687ba7e7-342c-4f3c-adef-ea2f269a78e4.png)
+![Screenshot_297](https://user-images.githubusercontent.com/67336649/129879109-c788b8f9-75a2-4866-809f-484c6cffaa98.png)
+
+## Gameplay ##
+
+[![RPGeeks](https://imgur.com/N7YnnJS.png)](https://youtu.be/Xe3jkos3Ejc?t=36 "Forgotten Tales")
 ## Development branch ##
 
 This is the home of our programming team.
